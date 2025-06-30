@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMPE 58K: Engineering Interactive Systems | Boğaziçi University</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        html {
+            scroll-padding-top: 80px; /* Account for fixed navbar height */
+        }
+        .guest-item {
+            background-color: #fed7aa;
+            color: #7c2d12;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            margin-bottom: 0.5rem;
+        }
+        .guest-item h6 {
+            color: #7c2d12;
+            margin-bottom: 0.25rem;
+        }
+        .guest-item strong {
+            color: #7c2d12;
+        }
+        .guest-item p {
+            color: #9a3412;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-code"></i> CMPE 58K
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#schedule">Weekly Schedule</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#guests">Guest Lectures</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div class="mb-3">
+                        <span class="badge bg-white text-dark fs-5 px-3 py-2">Spring 2024</span>
+                    </div>
+                    <h1 class="course-title">CMPE 58K</h1>
+                    <h2 class="course-subtitle">Engineering Interactive Systems</h2>
+                    <p class="lead">An interdisciplinary exploration into the design, development, and evaluation of interactive software and hardware systems</p>
+                    <div class="mt-4">
+                        <span class="badge bg-light text-dark me-2 fs-6">Spring 2024</span>
+                        <a href="https://bogazici.edu.tr/en" target="_blank" class="badge bg-light text-dark me-2 fs-6 text-decoration-none">Boğaziçi University</a>
+                        <span class="badge bg-light text-dark fs-6">13 Weeks</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <div class="hero-icon position-relative">
+                        <!-- Main AR/VR icon -->
+                        <i class="fas fa-vr-cardboard fa-5x text-white" style="opacity: 0.4; position: absolute; top: -10px; left: 30%; transform: translateX(-50%);"></i>
+                        
+                        <!-- Mobile device -->
+                        <i class="fas fa-mobile-alt fa-4x text-white" style="opacity: 0.4; position: absolute; top: 80px; left: 5%; transform: translateX(-50%);"></i>
+                        
+                        <!-- Microchip/Arduino -->
+                        <i class="fas fa-microchip fa-3x text-white" style="opacity: 0.5; position: absolute; top: 60px; left: 65%; transform: translateX(-50%);"></i>
+                        
+                        <!-- 3D printer/fabrication -->
+                        <i class="fas fa-cube fa-2x text-white" style="opacity: 0.4; position: absolute; top: 120px; left: 45%; transform: translateX(-50%);"></i>
+                        
+                        <!-- Sensors/connectivity -->
+                        <i class="fas fa-wifi fa-2x text-white" style="opacity: 0.4; position: absolute; top: 40px; left: 55%; transform: translateX(-50%);"></i>
+                        
+                        <!-- Hand interaction -->
+                        <i class="fas fa-hand-pointer fa-3x text-white" style="opacity: 0.6; position: absolute; top: 120px; left: 10%; transform: translateX(-50%);"></i>
+                        
+                        <!-- Robot/automation -->
+                        <i class="fas fa-robot fa-3x text-white" style="opacity: 0.7; position: absolute; top: 140px; left: 70%; transform: translateX(-50%);"></i>
+                        
+                        <!-- User/human element -->
+                        <i class="fas fa-users fa-4x text-white" style="opacity: 0.7; position: absolute; top: 80px; left: 25%; transform: translateX(-50%);"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Moodle Notice -->
+    <section class="py-2 text-white" style="background-color: #496178;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h6 class="mb-1 fs-6"><i class="fas fa-graduation-cap me-2"></i>Course Management System</h6>
+                    <p class="mb-0 small">Assignment submissions and materials available on Boğaziçi University Moodle</p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <a href="https://moodle.bogazici.edu.tr/login/login.php" target="_blank" class="btn btn-light btn-sm">
+                        <i class="fas fa-external-link-alt me-1"></i>Access Moodle
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Information -->
+    <section class="py-5">
+        <div class="container">
+            <div class="course-info">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start">
+                            <div class="me-1">
+                                <h4><i class="fas fa-user-tie me-2"></i>Instructor</h4>
+                                <p class="mb-1"><strong><a href="https://www.dogadogan.com/" target="_blank" class="text-decoration-none text-dark"> Doğa Doğan, PhD</a></strong></p>
+                                <p class="mb-3">Email: doga@mit.edu</p>
+                            </div>
+                            <img src="img/doga-dogan.jpg" alt="Doğa Doğan" class="rounded-circle flex-shrink-0" style="width: 90px; height: 90px; object-fit: cover; margin-left: 17px;">
+                        </div>
+                        
+                        <h4><i class="fas fa-graduation-cap me-2"></i>Course Objectives</h4>
+                        <p>This course equips students with practical skills and conceptual insights in technical Human-Computer Interaction (HCI) through hands-on learning with cutting-edge technologies.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h4><i class="fas fa-chart-pie me-2"></i>Assessment</h4>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="text-center p-3">
+                                    <div class="h2 text-primary">40%</div>
+                                    <div>Labs & Assignments</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-center p-3">
+                                    <div class="h2 text-primary">40%</div>
+                                    <div>Final Project</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-center p-3">
+                                    <div class="h2 text-primary">20%</div>
+                                    <div>Participation & Engagement</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Weekly Schedule Section -->
+    <section id="schedule" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center">Weekly Course Schedule</h2>
+            <p class="text-center mb-5">Detailed weekly breakdown of topics, activities, assignments, and guest lectures</p>
+            
+            <!-- Week 1 -->
+            <div class="week-section">
+                <div class="week-header">
+                    <i class="fas fa-calendar-week me-2"></i>Week 1: Introduction to the Course
+                </div>
+                <div class="week-content">
+                    <div class="week-topics">
+                        <h6><i class="fas fa-book-open me-2"></i>Topics Covered</h6>
+                        <ul class="mb-0">
+                            <li>Overview of technical Human-Computer Interaction (HCI)</li>
+                            <li>Introduction to interactive systems in today's technology landscape</li>
+                            <li>Setting up Unity development environment</li>
+                            <li>Course structure and expectations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 2 -->
+            <div class="week-section">
+                <div class="week-header">
+                    <i class="fas fa-calendar-week me-2"></i>Week 2: Design Principles, Usability, Affordance
+                </div>
+                <div class="week-content">
+                    <div class="week-topics">
+                        <h6><i class="fas fa-book-open me-2"></i>Topics Covered</h6>
+                        <ul>
+                            <li>Principles of interaction design and user-centered design methodologies</li>
+                            <li>Understanding usability and affordance in interface design</li>
+                            <li>Hands-on exercises on design thinking</li>
+                            <li>Conceptualizing interactive systems</li>
+                        </ul>
+                    </div>
+                    <div class="assignment-item">
+                        <h6><i class="fas fa-tasks me-2"></i>Assignment</h6>
+                        <strong>Designing a timetable for public transit</strong>
+                        <p class="mb-0 mt-1">Apply principles of usability and affordance to design a user-friendly timetable interface for public transportation systems.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 3 -->
+            <div class="week-section">
+                <div class="week-header">
+                    <i class="fas fa-calendar-week me-2"></i>Week 3: Augmented Reality
+                </div>
+                <div class="week-content">
+                    <div class="week-topics">
+                        <h6><i class="fas fa-book-open me-2"></i>Topics Covered</h6>
+                        <ul>
+                            <li>Concepts and applications of Augmented Reality</li>
+                            <li>Overview of mixed reality (AR/VR) technologies</li>
+                            <li>Building mobile AR applications with Unity</li>
+                            <li>Plane detection and anchoring virtual objects</li>
+                        </ul>
+                    </div>
+                    <div class="assignment-item">
+                        <h6><i class="fas fa-tasks me-2"></i>Assignment</h6>
+                        <strong>Unity Mobile AR Assignment</strong>
+                        <p class="mb-1 mt-1">Build a mobile AR application using Unity and AR Foundation, featuring plane detection, anchoring, and image tracking capabilities.</p>
+                        
+                        <!-- Collapsible Details Section -->
+                        <div class="mt-2">
+                            <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#arAssignmentDetails" aria-expanded="false" aria-controls="arAssignmentDetails">
+                                <i class="fas fa-chevron-down me-1"></i>View Details
+                            </button>
+                        </div>
+                        
+                        <div class="collapse mt-3" id="arAssignmentDetails">
+                            <div class="card card-body">
+                                <h6 class="mb-3"><i class="fas fa-clipboard-list me-2"></i>Assignment Requirements</h6>
+                                
+                                <!-- Prerequisites -->
+                                <div class="mb-3">
+                                    <h6 class="text-muted mb-2"><i class="fas fa-graduation-cap me-2"></i>Prerequisites</h6>
+                                    <div class="alert alert-info py-2">
+                                        <strong>Unity Essentials:</strong> Complete the Unity tutorial if you're not familiar with Unity
+                                        <br>
+                                        <a href="https://www.youtube.com/watch?v=XtQMytORBmM" target="_blank" class="btn btn-sm btn-primary mt-2">
+                                            <i class="fab fa-youtube me-1"></i>Watch Tutorial (46 min)
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <!-- Main Tasks -->
+                                <div class="mb-3">
+                                    <h6 class="text-muted mb-2"><i class="fas fa-tasks me-2"></i>Main Tasks</h6>
+                                    <p class="mb-2"><strong>Unity Mobile AR Development</strong> using AR Foundation</p>
+                                    
+                                    <!-- Task 1 -->
+                                    <div class="border-start border-primary ps-3 mb-3">
+                                        <h6 class="mb-1">1. Plane Detection & Anchoring Virtual Objects</h6>
+                                        <p class="text-muted mb-2">Implement plane detection in AR scene and anchor virtual objects to detected planes.</p>
+                                        <a href="https://www.youtube.com/watch?v=R3OCUE9TwZk" target="_blank" class="btn btn-sm btn-outline-primary">
+                                            <i class="fab fa-youtube me-1"></i>Tutorial (7 min)
+                                        </a>
+                                    </div>
+                                    
+                                    <!-- Task 2 -->
+                                    <div class="border-start border-success ps-3 mb-3">
+                                        <h6 class="mb-1">2. Image Tracking & Augmenting Images</h6>
+                                        <p class="text-muted mb-2">Track specific images and overlay digital content on them.</p>
+                                        <div class="mb-2">
+                                            <a href="https://www.youtube.com/watch?v=OwpRSF7X9sI" target="_blank" class="btn btn-sm btn-outline-success me-2">
+                                                <i class="fab fa-youtube me-1"></i>Single Image (10 min)
+                                            </a>
+                                            <a href="https://www.youtube.com/watch?v=cWEhMlN_bSk" target="_blank" class="btn btn-sm btn-outline-success">
+                                                <i class="fab fa-youtube me-1"></i>Multiple Images (24 min)
+                                            </a>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Task 3 -->
+                                    <div class="border-start border-warning ps-3 mb-3">
+                                        <h6 class="mb-1">3. Augmented Faces (Snapchat-like Filters)</h6>
+                                        <p class="text-muted mb-2">Create face filters similar to Snapchat using AR face tracking.</p>
+                                        <a href="https://developers.google.com/ar/develop/unity-arf/augmented-faces/developer-guide" target="_blank" class="btn btn-sm btn-outline-warning">
+                                            <i class="fas fa-external-link-alt me-1"></i>Google AR Documentation
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <!-- Deliverables -->
+                                <div class="mb-3">
+                                    <h6 class="text-muted mb-2"><i class="fas fa-upload me-2"></i>Deliverables</h6>
+                                    <ul class="list-unstyled border-start border-secondary ps-3">
+                                        <li class="mb-2">
+                                            <i class="fas fa-check-circle text-muted me-2"></i>
+                                            <strong>Implement all three features (1, 2, 3)</strong>
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-video text-muted me-2"></i>
+                                            <strong>Demo video</strong> showing each feature (minimum 1.5 minutes total)
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-mobile-alt text-muted me-2"></i>
+                                            <strong>APK or IPA file</strong> for testing
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-cloud-upload-alt text-muted me-2"></i>
+                                            Upload to <strong>Google Drive, YouTube (unlisted), or Dropbox</strong> and share links
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <!-- Due Date -->
+                                <div class="alert alert-warning py-2 mb-0">
+                                    <i class="fas fa-calendar-alt me-2"></i>
+                                    <strong>Due:</strong> Sunday, March 10, 2024, 9:00 PM
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reading-item">
+                        <h6><i class="fas fa-book me-2"></i>Required Readings</h6>
+                        <ul class="mb-0">
+                            <li>OmniTouch: Wearable Multitouch Interaction Everywhere (Harrison et al., UIST 2011)</li>
+                            <li>LightAnchors: Appropriating Point Lights for Spatially-Anchored AR Interfaces (Ahuja et al., UIST 2017)</li>
+                            <li>InfraredTags: Embedding Invisible AR Markers and Barcodes (Dogan et al., CHI 2022)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 4 -->
+            <div class="week-section">
+                <div class="week-header">
+                    <i class="fas fa-calendar-week me-2"></i>Week 4: UbiComp
+                </div>
+                <div class="week-content">
+                    <div class="week-topics">
+                        <h6><i class="fas fa-book-open me-2"></i>Topics Covered</h6>
+                        <ul>
+                            <li>Vision and principles of Ubiquitous Computing</li>
+                            <li>How to integrate digital information into the physical world</li>
+                            <li>Context-aware mobile applications using NFC tags</li>
+                            <li>Real-world sensing and interaction scenarios</li>
+                        </ul>
+                    </div>
+                    <div class="reading-item">
+                        <h6><i class="fas fa-book me-2"></i>Required Readings</h6>
+                        <ul class="mb-0">
+                            <li>The Computer for the 21st Century (Weiser, 1991)</li>
+                            <li>Wall++: Room-Scale Interactive and Context-Aware Sensing (Zhang et al., CHI 2018)</li>
+                            <li>IllumiPaper: Illuminated Interactive Paper (Klamka et al., CHI 2017)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 5 -->
+            <div class="week-section">
+                <div class="week-header">
+                    <i class="fas fa-calendar-week me-2"></i>Week 5: Paper Presentations & Arduino
+                </div>
+                <div class="week-content">
+                    <div class="week-topics">
+                        <h6><i class="fas fa-book-open me-2"></i>Topics Covered</h6>
+                        <ul>
+                            <li>Introduction to Tangible User Interfaces (TUIs)</li>
+                            <li>Interactive surfaces and physical computing</li>
+                            <li>Using Arduino with various sensors and actuators</li>
+                            <li>Creating tangible interactions</li>
+                        </ul>
+                    </div>
+                    <div class="assignment-item">
+                        <h6><i class="fas fa-tasks me-2"></i>Assignment</h6>
+                        <strong>Paper Discussion: AR, UbiComp, and Tangible Computing</strong>
+                        <p class="mb-0 mt-1">Critical analysis and discussion of research papers from previous weeks covering augmented reality, ubiquitous computing, and tangible computing topics.</p>
+                    </div>
+                    <div class="reading-item">
+                        <h6><i class="fas fa-book me-2"></i>Required Readings</h6>
+                        <ul class="mb-0">
+                            <li>Tangible Bits: Towards Seamless Interfaces between People, Bits and Atoms (Ishii et al., CHI 1997)</li>
+                            <li>Sensetable: A Wireless Object Tracking Platform for Tangible User Interfaces (Patten et al., CHI 2001)</li>
+                            <li>inFORM: Dynamic Physical Affordances and Constraints through Shape and Object Actuation (Follmer et al., UIST 2013)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 6 -->
+            <div class="week-section">
+                <div class="week-header">
+                    <i class="fas fa-calendar-week me-2"></i>Week 6: Team Formation, Personal Fabrication (3D Printing), Motors
+                </div>
+                <div class="week-content">
+                    <div class="week-topics">
+                        <h6><i class="fas fa-book-open me-2"></i>Topics Covered</h6>
+                        <ul>
+                            <li>Team formation for final projects</li>
+                            <li>Introduction to personal fabrication and 3D printing</li>
+                            <li>Working with motors and actuators</li>
+                            <li>Digital fabrication techniques and applications</li>
+                        </ul>
+                    </div>
+                    <div class="assignment-item">
+                        <h6><i class="fas fa-tasks me-2"></i>Assignment</h6>
+                        <strong>3D Printing a Personal Keychain</strong>
+                        <p class="mb-1 mt-1">Design and 3D print a personal keychain with multiple colors or embedded NFC tag. Deliverables include CAD file, G-code, and final print.</p>
+                        
+                        <!-- Collapsible Details Section -->
+                        <div class="mt-2">
+                            <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#keychainAssignmentDetails" aria-expanded="false" aria-controls="keychainAssignmentDetails">
+                                <i class="fas fa-chevron-down me-1"></i>View Details
+                            </button>
+                        </div>
+                        
+                        <div class="collapse mt-3" id="keychainAssignmentDetails">
+                            <div class="card card-body">
+                                <h6 class="mb-3"><i class="fas fa-clipboard-list me-2"></i>Assignment Requirements</h6>
+                                
+                                <!-- Assignment Options -->
+                                <div class="mb-3">
+                                    <h6 class="text-muted mb-2"><i class="fas fa-list-alt me-2"></i>Choose One Option</h6>
+                                    
+                                    <!-- Option 1 -->
+                                    <div class="border-start border-primary ps-3 mb-3">
+                                        <h6 class="mb-1"><i class="fas fa-palette me-2"></i>Option 1: Multi-Color Keychain</h6>
+                                        <p class="text-muted mb-0">Print a multi-color keychain using <strong>3 or more filament colors</strong></p>
+                                    </div>
+                                    
+                                    <!-- Option 2 -->
+                                    <div class="border-start border-success ps-3 mb-3">
+                                        <h6 class="mb-1"><i class="fas fa-microchip me-2"></i>Option 2: NFC-Embedded Keychain</h6>
+                                        <p class="text-muted mb-2">Print a keychain with an embedded NFC tag using one of these methods:</p>
+                                        <ul class="text-muted mb-0">
+                                            <li>Print multiple parts and glue them together with the NFC tag inside</li>
+                                            <li>Pause the print halfway through to place the tag, then continue printing</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <!-- Deliverables -->
+                                <div class="mb-3">
+                                    <h6 class="text-muted mb-2"><i class="fas fa-upload me-2"></i>Required Deliverables</h6>
+                                    <div class="alert alert-info py-2 mb-3">
+                                        <i class="fas fa-cloud-upload-alt me-2"></i>
+                                        Upload to <strong>Google Drive or Dropbox</strong>
+                                    </div>
+                                    
+                                    <ul class="list-unstyled border-start border-secondary ps-3">
+                                        <li class="mb-2">
+                                            <i class="fas fa-drafting-compass text-muted me-2"></i>
+                                            <strong>CAD file</strong> (Solidworks, Fusion 360, or TinkerCAD project link)
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-cube text-muted me-2"></i>
+                                            <strong>Final 3D mesh</strong> (.OBJ or .STL file)
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-code text-muted me-2"></i>
+                                            <strong>G-code file</strong> (printer instructions)
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-camera text-muted me-2"></i>
+                                            <strong>Photo of the final print</strong>
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-video text-muted me-2"></i>
+                                            <strong>For NFC objects:</strong> Video of reading the tag with your phone
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <!-- Important Note -->
+                                <div class="alert alert-warning py-2 mb-3">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                    <strong>Important:</strong> You need to bring the physical print to the lecture after the assignment deadline!
+                                </div>
+                                
+                                <!-- Due Date -->
+                                <div class="alert alert-warning py-2 mb-0">
+                                    <i class="fas fa-calendar-alt me-2"></i>
+                                    <strong>Due:</strong> Wednesday, April 3, 2024, 11:55 PM
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reading-item">
+                        <h6><i class="fas fa-book me-2"></i>Required Readings</h6>
+                        <ul class="mb-0">
+                            <li>Sensing Techniques for Mobile Interaction (Hinckley, UIST 2000)</li>
+                            <li>Touché: Enhancing Touch Interaction on Humans, Screens, Liquids, and Everyday Objects (Poupyrev et al., CHI 2012)</li>
+                            <li>ViBand: High-Fidelity Bio-Acoustic Sensing Using Commodity Smartwatch Accelerometers (Laput et al., UIST 2016)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 7 -->
+            <div class="week-section">
+                <div class="week-header">
+                    <i class="fas fa-calendar-week me-2"></i>Week 7: Arduino Communication, Sensing, and Visualization with Processing.org
+                </div>
+                <div class="week-content">
+                    <div class="week-topics">
+                        <h6><i class="fas fa-book-open me-2"></i>Topics Covered</h6>
+                        <ul>
+                            <li>Arduino communication protocols and data exchange</li>
+                            <li>Sensor data collection and processing</li>
+                            <li>Data visualization using Processing.org</li>
+                            <li>Real-time sensor data visualization techniques</li>
+                        </ul>
+                    </div>
+                    <div class="assignment-item">
+                        <h6><i class="fas fa-tasks me-2"></i>Assignment</h6>
+                        <strong>Project Abstract and/or Introduction, Planning Schedule</strong>
+                        <p class="mb-0 mt-1">Submit initial project proposal with abstract, team formation, and development timeline.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 8 -->
+            <div class="week-section">
+                <div class="week-header">
+                    <i class="fas fa-calendar-week me-2"></i>Week 8: Spring Break
+                </div>
+                <div class="week-content">
+                    <div class="week-topics">
+                        <h6><i class="fas fa-coffee me-2"></i>Spring Break</h6>
+                        <p class="mb-0">No classes scheduled. Time for project development, reflection, and preparation for the second half of the semester.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 9 -->
+            <div class="week-section">
+                <div class="week-header">
+                    <i class="fas fa-calendar-week me-2"></i>Week 9: Evaluation Methods in HCI
+                </div>
+                <div class="week-content">
+                    <div class="week-topics">
+                        <h6><i class="fas fa-book-open me-2"></i>Topics Covered</h6>
+                        <ul>
+                            <li>HCI evaluation methodologies and user testing approaches</li>
+                            <li>Research methods and techniques for evaluating interactive systems</li>
+                            <li>Case studies and examples of HCI evaluation in practice</li>
+                        </ul>
+                    </div>
+                    <div class="guest-item">
+                        <h6><i class="fas fa-microphone-alt me-2"></i>Guest Lecture</h6>
+                        <strong><a href="#guest-parastoo" class="text-decoration-none text-dark">Parastoo Abtahi (Princeton)</a></strong>
+                        <p class="mb-0 mt-1">"From Haptic Illusions to Beyond Real Interactions in Virtual Reality"</p>
+                    </div>
+                    <div class="assignment-item">
+                        <h6><i class="fas fa-tasks me-2"></i>Assignment</h6>
+                        <strong>Final Project Milestone</strong>
+                        <p class="mb-0 mt-1">Submit a progress report and demonstrate key milestones of the project.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 10 -->
+            <div class="week-section">
+                <div class="week-header">
+                    <i class="fas fa-calendar-week me-2"></i>Week 10: Creating Rotoscopes & Digital Fabrication
+                </div>
+                <div class="week-content">
+                    <div class="week-topics">
+                        <h6><i class="fas fa-book-open me-2"></i>Topics Covered</h6>
+                        <ul>
+                            <li>Rotoscoping for project documentation and visualization</li>
+                            <li>Advanced digital fabrication techniques (multi-material printing, laser cutting, etc.)</li>
+                        </ul>
+                    </div>
+                    <div class="guest-item">
+                        <h6><i class="fas fa-microphone-alt me-2"></i>Guest Lecture</h6>
+                        <strong><a href="#guest-zjenja" class="text-decoration-none text-dark">Zjenja Doubrovski (TU Delft)</a></strong>
+                        <p class="mb-0 mt-1">"Designing with the 3D Printing Process"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 11 -->
+            <div class="week-section">
+                <div class="week-header">
+                    <i class="fas fa-calendar-week me-2"></i>Week 11: Final Project Demos
+                </div>
+                <div class="week-content">
+                    <div class="week-topics">
+                        <h6><i class="fas fa-book-open me-2"></i>Topics Covered</h6>
+                        <ul>
+                            <li>Project demonstrations and peer feedback sessions</li>
+                            <li>Experiences and insights from student projects</li>
+                            <li>Opportunities for collaboration and networking</li>
+                        </ul>
+                    </div>
+                    <div class="guest-item">
+                        <h6><i class="fas fa-microphone-alt me-2"></i>Guest Lecture</h6>
+                        <strong><a href="#guest-ken" class="text-decoration-none text-dark">Ken Nakagaki (University of Chicago)</a></strong>
+                        <p class="mb-0 mt-1">"Actuated Experience: Interactive 'Actuated' Interfaces that Actuate People"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 12 -->
+            <div class="week-section">
+                <div class="week-header">
+                    <i class="fas fa-calendar-week me-2"></i>Week 12: Final Project Check-In
+                </div>
+                <div class="week-content">
+                    <div class="week-topics">
+                        <h6><i class="fas fa-book-open me-2"></i>Topics Covered</h6>
+                        <ul>
+                            <li>Final project refinement and paper draft preparation</li>
+                            <li>Review and feedback on project progress</li>
+                            <li>Guidance on project paper/report preparation</li>
+                        </ul>
+                    </div>
+                    <div class="guest-item">
+                        <h6><i class="fas fa-microphone-alt me-2"></i>Guests</h6>
+                        <strong><a href="#guest-rong-hao" class="text-decoration-none text-dark">Rong-Hao Liang</a> & <a href="#guest-david" class="text-decoration-none text-dark">David Kim</a></strong>
+                        <p class="mb-0 mt-1">Eindhoven University of Technology</p>
+                    </div>
+                    <div class="assignment-item">
+                        <h6><i class="fas fa-tasks me-2"></i>Assignment</h6>
+                        <strong>Project paper/report draft</strong>
+                        <p class="mb-1 mt-1">Submit a 5-page research paper draft based on ACM CHI template, featuring at least 3 figures including a rotoscope.</p>
+                        
+                        <!-- Collapsible Details Section -->
+                        <div class="mt-2">
+                            <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#paperDraftDetails" aria-expanded="false" aria-controls="paperDraftDetails">
+                                <i class="fas fa-chevron-down me-1"></i>View Details
+                            </button>
+                        </div>
+                        
+                        <div class="collapse mt-3" id="paperDraftDetails">
+                            <div class="card card-body">
+                                <h6 class="mb-3"><i class="fas fa-clipboard-list me-2"></i>Paper Draft Requirements</h6>
+                                
+                                <!-- Template Requirements -->
+                                <div class="mb-3">
+                                    <h6 class="text-muted mb-2"><i class="fas fa-file-alt me-2"></i>Template & Format</h6>
+                                    <div class="border-start border-primary ps-3 mb-3">
+                                        <h6 class="mb-1"><i class="fab fa-overleaf me-2"></i>ACM CHI Overleaf Template</h6>
+                                        <p class="text-muted mb-2">Use the official 2-column ACM SIG Proceedings template</p>
+                                        <a href="https://www.overleaf.com/latex/templates/association-for-computing-machinery-acm-sig-proceedings-template/bmvfhcdnxfty" target="_blank" class="btn btn-sm btn-outline-primary">
+                                            <i class="fab fa-overleaf me-1"></i>Access Template on Overleaf
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <!-- Content Requirements -->
+                                <div class="mb-3">
+                                    <h6 class="text-muted mb-2"><i class="fas fa-list-check me-2"></i>Content Requirements</h6>
+                                    
+                                    <ul class="list-unstyled border-start border-secondary ps-3">
+                                        <li class="mb-2">
+                                            <i class="fas fa-file-lines text-muted me-2"></i>
+                                            <strong>5 pages</strong> (excluding references)
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-images text-muted me-2"></i>
+                                            <strong>At least 3 figures</strong> that you prepared
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-star text-muted me-2"></i>
+                                            <strong>Bonus points:</strong> Include a rotoscope figure (traced from photograph as learned in class)
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-columns text-muted me-2"></i>
+                                            <strong>2-column format</strong> as per ACM template
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <!-- Submission Requirements -->
+                                <div class="mb-3">
+                                    <h6 class="text-muted mb-2"><i class="fas fa-upload me-2"></i>Submission Requirements</h6>
+                                    
+                                    <div class="alert alert-info py-2 mb-3">
+                                        <i class="fas fa-cloud-upload-alt me-2"></i>
+                                        Upload to <strong>Google Drive or Dropbox</strong> and share the PDF link
+                                    </div>
+                                    
+                                    <ul class="list-unstyled border-start border-secondary ps-3">
+                                        <li class="mb-2">
+                                            <i class="fas fa-file-pdf text-muted me-2"></i>
+                                            <strong>PDF file</strong> of your paper draft
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-link text-muted me-2"></i>
+                                            <strong>Overleaf URL</strong> specified in the text field
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-share-alt text-muted me-2"></i>
+                                            <strong>Shareable link</strong> from Google Drive or Dropbox
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <!-- Timeline Note -->
+                                <div class="alert alert-info py-2 mb-3">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    <strong>Note:</strong> Upload must be completed before the Monday lecture
+                                </div>
+                                
+                                <!-- Due Date -->
+                                <div class="alert alert-warning py-2 mb-0">
+                                    <i class="fas fa-calendar-alt me-2"></i>
+                                    <strong>Due:</strong> Monday, May 6, 2024, 2:00 PM
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 13 -->
+            <div class="week-section">
+                <div class="week-header">
+                    <i class="fas fa-calendar-week me-2"></i>Week 13: Final Project Presentations
+                </div>
+                <div class="week-content">
+                    <div class="week-topics">
+                        <h6><i class="fas fa-book-open me-2"></i>Topics Covered</h6>
+                        <ul>
+                            <li>Final project presentations, critique, and discussion on research publication pathways</li>
+                            <li>Opportunities for feedback and networking</li>
+                            <li>Guidance on research publication and presentation techniques</li>
+                        </ul>
+                    </div>
+                    <div class="guest-item">
+                        <h6><i class="fas fa-microphone-alt me-2"></i>Guest Lecture</h6>
+                        <strong><a href="#guest-michael" class="text-decoration-none text-dark">Michael Wessely (Aarhus University)</a></strong>
+                        <p class="mb-0 mt-1">"Reprogrammable Materials"</p>
+                    </div>
+                    <div class="assignment-item">
+                        <h6><i class="fas fa-tasks me-2"></i>Assignments</h6>
+                        <div class="mb-2">
+                            <strong>Final Project Report</strong>
+                            <p class="mb-1">Submit comprehensive final project documentation and analysis.</p>
+                        </div>
+                        <div>
+                            <strong>Final Project Video</strong>
+                            <p class="mb-0">Create and submit a video presentation of your project.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Student Final Projects -->
+                    <div class="mt-4">
+                        <h6><i class="fas fa-lightbulb me-2"></i>Student Final Projects</h6>
+                        <p class="mb-3">Students worked in teams to design and prototype innovative interactive systems, culminating in research-quality projects suitable for publication at top HCI conferences.</p>
+                        
+                        <div class="mb-3 ps-3 border-start border-secondary">
+                            <h6 class="mb-1"><i class="fas fa-atom me-2"></i>Smart Speckle Sensor</h6>
+                            <p class="mb-1">An sensing system utilizing speckle patterns for advanced interaction detection and measurement for robotic arms.</p>
+                            <p class="text-muted mb-0"><small>Team: Yakup Ensar Evli, Mahir Demir, Ertuğrul Keskin</small></p>
+                        </div>
+                        
+                        <div class="mb-3 ps-3 border-start border-secondary">
+                            <h6 class="mb-1"><i class="fas fa-cube me-2"></i>Spatial and Immersive CAD+Slicer</h6>
+                            <p class="mb-1">A spatial computing approach to 3D modeling and slicing, bringing CAD tools into immersive environments, using Meta Quest 3.</p>
+                            <p class="text-muted mb-0"><small>Team: Oğuz Arslan, Artun Akdoğan</small></p>
+                        </div>
+                        
+                        <div class="mb-3 ps-3 border-start border-secondary">
+                            <h6 class="mb-1"><i class="fas fa-robot me-2"></i>XR Robot Interface</h6>
+                            <p class="mb-1">Extended reality interface for intuitive robot control and programming to bridge physical and digital interactions, using Meta Quest 3 and Universal Robot 10.</p>
+                            <p class="text-muted mb-0"><small>Team: Emre Batuhan Göç, Batuhan İlhan, Berk Işık</small></p>
+                        </div>
+                        
+                        <div class="mb-3 ps-3 border-start border-secondary">
+                            <h6 class="mb-1"><i class="fas fa-vr-cardboard me-2"></i>XR-Objects Experience on XR Headset</h6>
+                            <p class="mb-1">Novel interaction paradigms for manipulating virtual objects in extended reality environments (see <a href="https://xr-objects.github.io/" target="_blank"></a>Augmented Object Intelligence with XR-Objects, UIST'24</a>), adapted for Meta Quest 3.</p>
+                            <p class="text-muted mb-0"><small>Team: Emre Abdulkadiroğlu, Bora Binici, Salih Can Aydoğdu</small></p>
+                        </div>
+                        
+                        <div class="mb-3 ps-3 border-start border-secondary">
+                            <h6 class="mb-1"><i class="fas fa-headphones me-2"></i>Spatial Audio for Visual Impairments</h6>
+                            <p class="mb-1">Accessibility-focused project developing spatial audio interfaces to assist individuals with visual impairments in navigation and interaction.</p>
+                            <p class="text-muted mb-0"><small>Team: Berk Turgut, Dolunay Solmaz</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guest Lectures Section -->
+    <section id="guests" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center">Distinguished Guest Lecturers</h2>
+            <p class="text-center mb-5">World-renowned experts from leading research institutions sharing cutting-edge insights</p>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card guest-speaker-card h-100" id="guest-parastoo">
+                        <div class="speaker-date">
+                            <i class="fas fa-calendar me-1"></i>Apr 15
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="img/parastoo-abtahi.png" alt=" Parastoo Abtahi" class="speaker-photo">
+                            <h5 class="card-title"><i class="fas fa-user-graduate me-2"></i> Parastoo Abtahi</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Princeton University</h6>
+                            <p class="card-text"><strong>From Haptic Illusions to Beyond Real Interactions in Virtual Reality</strong></p>
+                            <p class="card-text">Exploring how understanding human perception can design VR interactions that overcome hardware limitations and extend our abilities beyond reality.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card guest-speaker-card h-100" id="guest-zjenja">
+                        <div class="speaker-date">
+                            <i class="fas fa-calendar me-1"></i>Apr 22
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="img/zjenja-doubrovski.jpg" alt=" Zjenja Doubrovski" class="speaker-photo">
+                            <h5 class="card-title"><i class="fas fa-user-graduate me-2"></i> Zjenja Doubrovski</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">TU Delft, Netherlands</h6>
+                            <p class="card-text"><strong>Designing with the 3D Printing Process</strong></p>
+                            <p class="card-text">Including the printing process in design to leverage microstructures that emerge during printing for novel mechanical and visual properties.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card guest-speaker-card h-100" id="guest-ken">
+                        <div class="speaker-date">
+                            <i class="fas fa-calendar me-1"></i>Apr 29
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="img/ken-nkagaki.jpg" alt=" Ken Nakagaki" class="speaker-photo">
+                            <h5 class="card-title"><i class="fas fa-user-graduate me-2"></i> Ken Nakagaki</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">University of Chicago</h6>
+                            <p class="card-text"><strong>Actuated Experience: Interactive 'Actuated' Interfaces that Actuate People</strong></p>
+                            <p class="card-text">Exploration of tangible and embodied interactions with computers, materials, and environments through dynamic interfaces.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card guest-speaker-card h-100" id="guest-rong-hao">
+                        <div class="speaker-date">
+                            <i class="fas fa-calendar me-1"></i>May 6
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="img/rong-hao-liang.png" alt=" Rong-Hao Liang" class="speaker-photo">
+                            <h5 class="card-title"><i class="fas fa-user-graduate me-2"></i> Rong-Hao Liang</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Eindhoven University of Technology</h6>
+                            <p class="card-text"><strong>Designing Unconventional Wearable Interfaces for HCI</strong></p>
+                            <p class="card-text">Beyond watches and glasses: functional modules like batteryless touchpads, 3D-printed fabric keypads, and interactive clothing.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card guest-speaker-card h-100" id="guest-david">
+                        <div class="speaker-date">
+                            <i class="fas fa-calendar me-1"></i>May 6
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="img/david-kim.jpg" alt=" David Kim" class="speaker-photo">
+                            <h5 class="card-title"><i class="fas fa-user-graduate me-2"></i> David Kim</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Google, Zurich</h6>
+                            <p class="card-text"><strong>Input and Interfaces for Emerging Platforms: A Personal Journey in VR and AR</strong></p>
+                            <p class="card-text">Research and development of input technologies for interactive surfaces, VR, and AR, with insights from industry experience.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card guest-speaker-card h-100" id="guest-michael">
+                        <div class="speaker-date">
+                            <i class="fas fa-calendar me-1"></i>May 13
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="img/michael-wessely.jpg" alt=" Michael Wessely" class="speaker-photo">
+                            <h5 class="card-title"><i class="fas fa-user-graduate me-2"></i> Michael Wessely</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Aarhus University, Denmark</h6>
+                            <p class="card-text"><strong>Reprogrammable Materials</strong></p>
+                            <p class="card-text">Exploring the future of materials that can be dynamically reconfigured and reprogrammed for various applications.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h5>CMPE 58K: Engineering Interactive Systems</h5>
+                    <p>Spring 2024 • <a href="https://bogazici.edu.tr/en" target="_blank" class="text-white text-decoration-none">Boğaziçi University</a> • <a href="https://cmpe.bogazici.edu.tr/" target="_blank" class="text-white text-decoration-none">Computer Engineering Department</a></p>
+                    <p>An interdisciplinary course exploring the design, development, and evaluation of interactive software and hardware systems through hands-on learning with cutting-edge technologies including AR, ubiquitous computing, tangible interfaces, and digital fabrication.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Course Topics</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check me-2"></i>Augmented Reality</li>
+                        <li><i class="fas fa-check me-2"></i>Ubiquitous Computing</li>
+                        <li><i class="fas fa-check me-2"></i>Tangible Computing</li>
+                        <li><i class="fas fa-check me-2"></i>Digital Fabrication</li>
+                        <li><i class="fas fa-check me-2"></i>Mobile & Wearable Computing</li>
+                        <li><i class="fas fa-check me-2"></i>Human-Computer Interaction</li>
+                    </ul>
+                </div>
+            </div>
+            <hr style="border-color: rgba(255,255,255,0.2);">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p>&copy; 2024 <a href="https://www.dogadogan.com/" target="_blank" class="text-white text-decoration-none"> Mustafa Doğa Doğan</a> • <a href="https://bogazici.edu.tr/en" target="_blank" class="text-white text-decoration-none">Boğaziçi University</a> • Course Archive</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html> 

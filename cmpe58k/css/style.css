@@ -1,0 +1,200 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #3498db;
+    --text-color: #2c3e50;
+    --light-bg: #f8f9fa;
+}
+
+body {
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Narrower container */
+.container {
+    max-width: 1000px;
+}
+
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 5rem 0;
+}
+
+.course-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.course-subtitle {
+    font-size: 2rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 2rem;
+    border-bottom: 3px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 1.5rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Weekly structure styling */
+.week-section {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.week-header {
+    background: linear-gradient(135deg, var(--accent-color), #2980b9);
+    color: white;
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.week-content {
+    padding: 1.5rem;
+}
+
+.week-topics {
+    background: var(--light-bg);
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.assignment-item {
+    background: #e8f5e8;
+    border-left: 4px solid #27ae60;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border-radius: 0 5px 5px 0;
+}
+
+.guest-item {
+    background: #fdeaea;
+    border-left: 4px solid #e74c3c;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border-radius: 0 5px 5px 0;
+}
+
+.reading-item {
+    background: #f0f8ff;
+    border-left: 4px solid #3498db;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border-radius: 0 5px 5px 0;
+}
+
+.navbar {
+    background-color: white !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    color: var(--primary-color) !important;
+}
+
+.nav-link {
+    color: var(--text-color) !important;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: var(--accent-color) !important;
+}
+
+.course-info {
+    background-color: var(--light-bg);
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+}
+
+.footer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 3rem 0;
+    margin-top: 5rem;
+}
+
+.badge-assignment {
+    background-color: #27ae60;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.badge-guest {
+    background-color: #e74c3c;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.badge-reading {
+    background-color: #3498db;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Guest speaker specific styles */
+.guest-speaker-card {
+    border-left: 4px solid #e74c3c;
+    position: relative;
+}
+
+.speaker-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #e74c3c;
+    margin-bottom: 1rem;
+}
+
+.speaker-date {
+    background: rgba(231, 76, 60, 0.9);
+    color: white;
+    padding: 0.3rem 0.7rem;
+    border-radius: 0 0 0 15px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    box-shadow: 0 2px 6px rgba(231, 76, 60, 0.2);
+}
+
+.project-card {
+    border-left: 4px solid #9b59b6;
+} 
