@@ -252,7 +252,7 @@ a:hover .inline-logo, a:focus-visible .inline-logo { filter: none; }
 .vp-center-art svg { display: block; width: 100%; height: auto; }
 .vision-center-svg .v-st25 { fill: transparent; }
 /* thinner white strokes on the sparkle icon in the digital chat bubble (SVG class st30 = 2px) */
-.vision-center-svg .v-st30, .vision-svg .v-st30 { stroke-width: 1.2px; }
+.vision-center-svg .v-st30, .vision-svg .v-st30 { stroke-width: 0.8px; }  /* drawn 1.5x larger, so ~1.2px on screen */
 .vision-center-svg .v-theme-art { cursor: pointer; transition: opacity 0.25s ease, filter 0.2s ease; }
 .vision-center-svg .v-theme-art:hover { filter: url(#vfx-hover); }  /* SVG filter (in the drawing's <defs>): works in Safari too */
 /* Wash out instead of fading: the art must stay opaque, or the connector behind it shows through. */

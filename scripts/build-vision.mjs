@@ -25,9 +25,28 @@ svg = svg.replace(/xlink:href="data:image\/(png|jpeg);base64,([^"]+)"/g, (_, typ
   images.push({ name, buf: Buffer.from(b64, 'base64') });
   return `href="/images/vision/${name}"`;
 });
+// The physical-objects illustration is a raster image; enlarge its three QR markers
+// slightly (each scaled around its own center). Boxes are in the original image's pixels,
+// so this only runs for that exact 853x844 export.
+const MARKER_BOXES = [[95, 518, 178, 604], [304, 543, 389, 628], [575, 548, 660, 633]];
+const MARKER_SCALE = 1.25;
+async function enlargeMarkers(sharp, buf) {
+  const meta = await sharp(buf).metadata();
+  if (meta.width !== 853 || meta.height !== 844) return buf;
+  const pad = 6, layers = [];
+  for (const [x0, y0, x1, y1] of MARKER_BOXES) {
+    const left = x0 - pad, top = y0 - pad, width = x1 - x0 + 2 * pad, height = y1 - y0 + 2 * pad;
+    const W = Math.round(width * MARKER_SCALE), H = Math.round(height * MARKER_SCALE);
+    const input = await sharp(buf).extract({ left, top, width, height }).resize(W, H, { kernel: 'lanczos3' }).png().toBuffer();
+    layers.push({ input, left: Math.round(left + width / 2 - W / 2), top: Math.round(top + height / 2 - H / 2) });
+  }
+  return sharp(buf).composite(layers).png().toBuffer();
+}
+
 try {
   const sharp = (await import('sharp')).default;
-  for (const { name, buf } of images) {
+  for (const { name, buf: original } of images) {
+    const buf = await enlargeMarkers(sharp, original);
     await sharp(buf).resize({ width: 360, withoutEnlargement: true }).webp({ quality: 82 }).toFile(new URL(`public/images/vision/${name}`, root).pathname);
   }
 } catch (e) {
@@ -52,6 +71,15 @@ svg = svg
   .replace(/id="((?:radial|linear)-gradient\d*)"/g, 'id="v-$1"')
   .replace(/url\(#((?:radial|linear)-gradient\d*)\)/g, 'url(#v-$1)')
   .replace(/xlink:href="#/g, 'href="#');
+
+// 2b. Enlarge the sparkle icon inside the digital speech bubble (1.5x around the bubble's center).
+{
+  const m = svg.match(/<rect class="v-st27" x="([\d.]+)" y="([\d.]+)" width="([\d.]+)" height="([\d.]+)"\/>\s*<g>(\s*<path class="v-st30")/);
+  if (m) {
+    const cx = +m[1] + +m[3] / 2, cy = +m[2] + +m[4] / 2, k = 1.5;
+    svg = svg.replace(m[0], m[0].replace(/<g>(\s*<path class="v-st30")/, `<g class="v-sparkle" transform="translate(${cx} ${cy}) scale(${k}) translate(${-cx} ${-cy})">$1`));
+  } else console.warn('[vision] sparkle icon not found');
+}
 
 // 3. Interactive regions
 const label = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
