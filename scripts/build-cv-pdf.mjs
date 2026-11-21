@@ -34,7 +34,7 @@ export async function renderCvPdf(baseUrl) {
       headerTemplate: '<span></span>',
       footerTemplate:
         '<div style="width:100%;font-family:Helvetica,Arial,sans-serif;font-size:7.5pt;color:#7b8494;padding:0 16mm;display:flex;justify-content:space-between">' +
-        `<span>Mustafa Doğa Doğan · CV · updated ${new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })} · dogadogan.com/cv</span>` +
+        `<span>Doğa Doğan, PhD · updated ${new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</span>` +
         '<span><span class="pageNumber"></span> / <span class="totalPages"></span></span></div>',
     });
   } finally {

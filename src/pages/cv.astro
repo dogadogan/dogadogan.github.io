@@ -41,6 +41,7 @@ const contactLinks = profile.links.filter((l: any) => ['Google Scholar', 'Linked
       .row p { margin: 0; }
       .row .when { color: var(--ink-3); font-size: 8.6pt; white-space: nowrap; text-align: right; }
       .sub { color: var(--ink-2); font-size: 8.8pt; }
+      .edu-line { font-size: 8.7pt; letter-spacing: -0.005em; }  /* keep each degree on one line */
       ol.pubs { margin: 0; padding-left: 6.5mm; }
       ol.pubs li { margin-bottom: 1.8mm; break-inside: avoid; padding-left: 0.5mm; }
       ol.pubs li::marker { color: var(--ink-3); font-size: 8.4pt; }
@@ -82,7 +83,7 @@ const contactLinks = profile.links.filter((l: any) => ['Google Scholar', 'Linked
       {cv.education.map((e: any) => (
         <div class="row">
           <div>
-            <p><strong>{e.degree}</strong>, {e.org}</p>
+            <p class="edu-line"><strong>{e.degree}</strong>, {e.org}</p>
             {e.note && <p class="sub" set:html={md(e.note)} />}
           </div>
           <p class="when">{e.years}<br />{e.place}</p>
