@@ -440,8 +440,9 @@ a:hover .inline-logo, a:focus-visible .inline-logo { filter: none; }
 .tl-teaching { margin: 0.25rem 0 0; padding-left: 1rem; font-size: 0.85rem; color: var(--ink-2); }
 .bullets { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.35rem; font-size: 0.92rem; color: var(--ink-2); }
 .bullets li::marker { color: var(--ink-3); }
-.service-grid { columns: 3 260px; column-gap: 3rem; }  /* groups flow one after another, no grid rows */
-.service-grid > div { break-inside: avoid; margin-bottom: 1.75rem; }
+.service-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 3rem; align-items: start; }
+.service-group { margin-bottom: 1.75rem; }  /* groups stack inside their column (set by `column` in activities.yaml) */
+@media (max-width: 900px) { .service-grid { grid-template-columns: 1fr; } }
 
 /* ---------- Moments ---------- */
 .moments { padding-block: clamp(2.5rem, 5vw, 4rem); border-top: 1px solid var(--rule); }

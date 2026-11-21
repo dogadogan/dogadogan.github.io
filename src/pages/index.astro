@@ -194,10 +194,14 @@ const list = {
   <section class="service wrap" id="service" aria-labelledby="service-heading">
     <h2 id="service-heading" class="section-title">Service</h2>
     <div class="service-grid">
-      {activities.service.map((g: any) => (
-        <div>
-          <h3 class="section-label mono">{g.group}</h3>
-          <ul class="bullets">{g.items.map((i: string) => <li set:html={md(i)} />)}</ul>
+      {[1, 2, 3].map((col) => (
+        <div class="service-col">
+          {activities.service.filter((g: any) => (g.column ?? 1) === col).map((g: any) => (
+            <div class="service-group">
+              <h3 class="section-label mono">{g.group}</h3>
+              <ul class="bullets">{g.items.map((i: string) => <li set:html={md(i)} />)}</ul>
+            </div>
+          ))}
         </div>
       ))}
     </div>
