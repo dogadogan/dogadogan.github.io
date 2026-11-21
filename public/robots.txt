@@ -1,0 +1,5 @@
+# Everyone, including AI search and assistant crawlers, is welcome.
+User-agent: *
+Allow: /
+
+Sitemap: https://www.dogadogan.com/sitemap-index.xml

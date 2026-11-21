@@ -1,0 +1,159 @@
+---
+// Printable CV generated from the same data as the website.
+// scripts/build-cv-pdf.mjs turns this page into /Mustafa-Doga-Dogan-CV.pdf after every build.
+import '@fontsource-variable/schibsted-grotesk';
+import { profile, cv, activities, getProjects, isMe, md, noImages, absolute } from '../lib/data';
+
+const projects = await getProjects();
+const awards = projects.filter((p) => p.data.award);
+const pressed = projects.filter((p) => p.data.press.length > 0);
+const teaching = cv.experience.flatMap((e: any) => (e.teaching ?? []).map((t: any) => ({ ...t, org: e.org })));
+const primary = (p: (typeof projects)[number]) =>
+  p.data.links.find((l) => /^(paper|pdf|doi)$/i.test(l.label))?.url ?? absolute(`/projects/${p.id}/`);
+const contactLinks = profile.links.filter((l: any) => ['Google Scholar', 'LinkedIn', 'GitHub'].includes(l.label));
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CV | {profile.fullName}</title>
+    <meta name="description" content={`Curriculum vitae of ${profile.fullName}, ${profile.title} at ${profile.org}.`} />
+    <link rel="canonical" href={absolute('/cv/')} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <style is:global>
+      @page { size: A4; margin: 16mm 16mm 18mm; }
+      :root { --ink: #1b2230; --ink-2: #4a5466; --ink-3: #7b8494; --rule: #dfe3e8; }
+      * { box-sizing: border-box; }
+      html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      body { margin: 0; font-family: 'Schibsted Grotesk Variable', 'Helvetica Neue', Arial, sans-serif; color: var(--ink); font-size: 9.6pt; line-height: 1.42; background: #fff; }
+      main { max-width: 178mm; margin: 0 auto; padding: 12mm 0; }
+      @media print { main { padding: 0; } .screen-only { display: none !important; } }
+      a { color: inherit; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      header { display: grid; grid-template-columns: 1fr auto; gap: 6mm; align-items: end; padding-bottom: 4mm; border-bottom: 1.5pt solid var(--ink); }
+      h1 { font-size: 21pt; line-height: 1; letter-spacing: -0.03em; margin: 0 0 2mm; font-weight: 750; white-space: nowrap; }
+      .role { font-size: 10.5pt; margin: 0; color: var(--ink-2); }
+      .contact { text-align: right; font-size: 8.6pt; color: var(--ink-2); margin: 0; line-height: 1.5; }
+      .summary { margin: 4mm 0 0; color: var(--ink-2); font-size: 9.4pt; }
+      h2 { font-size: 8.4pt; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 650; margin: 6mm 0 2.2mm; padding-bottom: 1mm; border-bottom: 0.6pt solid var(--rule); color: var(--ink); break-after: avoid; }
+      .row { display: grid; grid-template-columns: 1fr auto; gap: 4mm; break-inside: avoid; margin-bottom: 2.2mm; }
+      .row p { margin: 0; }
+      .row .when { color: var(--ink-3); font-size: 8.6pt; white-space: nowrap; text-align: right; }
+      .sub { color: var(--ink-2); font-size: 8.8pt; }
+      ol.pubs { margin: 0; padding-left: 6.5mm; }
+      ol.pubs li { margin-bottom: 1.8mm; break-inside: avoid; padding-left: 0.5mm; }
+      ol.pubs li::marker { color: var(--ink-3); font-size: 8.4pt; }
+      .pub-title { font-weight: 650; }
+      .pub-authors { color: var(--ink-2); }
+      .pub-authors strong { color: var(--ink); font-weight: 650; }
+      .pub-venue { font-style: normal; }
+      .award { color: var(--ink); font-weight: 600; }
+      ul.plain { margin: 0; padding-left: 4mm; }
+      ul.plain li { margin-bottom: 0.8mm; break-inside: avoid; }
+      .group { font-weight: 650; margin: 2mm 0 0.8mm; }
+      .cols { columns: 2; column-gap: 8mm; }
+      .cols > * { break-inside: avoid; }
+      .toolbar { position: sticky; top: 0; display: flex; gap: 8px; justify-content: flex-end; padding: 8px 0; background: #fff; }
+      .toolbar a { border: 1px solid var(--rule); border-radius: 999px; padding: 4px 12px; font-size: 13px; font-weight: 500; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <nav class="toolbar screen-only" aria-label="CV actions">
+        <a href="/">dogadogan.com</a>
+        <a href="/Mustafa-Doga-Dogan-CV.pdf">Download PDF</a>
+      </nav>
+
+      <header>
+        <div>
+          <h1>{profile.fullName}, PhD</h1>
+          <p class="role">{profile.title}, {profile.org} · {profile.location}</p>
+        </div>
+        <p class="contact">
+          <a href={profile.siteUrl}>{profile.siteUrl.replace(/^https?:\/\//, '')}</a><br />
+          {profile.cvEmail ?? profile.email}<br />
+          {contactLinks.map((l: any, i: number) => <><a href={l.url}>{l.label}</a>{i < contactLinks.length - 1 ? ' · ' : ''}</>)}
+        </p>
+      </header>
+      <p class="summary" set:html={md(noImages(profile.summary))} />
+
+      <h2>Education</h2>
+      {cv.education.map((e: any) => (
+        <div class="row">
+          <div>
+            <p><strong>{e.degree}</strong>, {e.org}</p>
+            {e.note && <p class="sub" set:html={md(e.note)} />}
+          </div>
+          <p class="when">{e.years}<br />{e.place}</p>
+        </div>
+      ))}
+
+      <h2>Research experience</h2>
+      {cv.experience.map((e: any) => (
+        <div class="row">
+          <div>
+            <p><strong>{e.role}</strong>, {e.org}</p>
+            <p class="sub">
+              {e.units.map((u: any) => u.label).join(' · ')}
+              {e.people && <> · {e.people.label}: {e.people.names.map((n: any) => n.name).join(', ')}</>}
+            </p>
+          </div>
+          <p class="when">{e.place}</p>
+        </div>
+      ))}
+
+      <h2>Honors and awards</h2>
+      <ul class="plain">
+        {awards.map((p) => (
+          <li><span class="award">{p.data.award}</span> · {p.data.short} ({p.data.venueShort})</li>
+        ))}
+      </ul>
+
+      <h2>Publications</h2>
+      <ol class="pubs" reversed>
+        {projects.map((p) => {
+          const d = p.data;
+          return (
+            <li>
+              <span class="pub-authors">{d.authors.map((a, i) => <>{isMe(a) ? <strong>{a}</strong> : a}{i < d.authors.length - 1 ? ', ' : '. '}</>)}</span>
+              <a class="pub-title" href={primary(p)}>{d.title}.</a>{' '}
+              <span class="pub-venue">{d.venue}{d.venue.includes(String(d.year)) ? '' : `, ${d.year}`}.</span>
+              {d.award && <> <span class="award">{d.award}.</span></>}
+            </li>
+          );
+        })}
+      </ol>
+      {projects.some((p) => p.data.authorNote) && <p class="sub">* Equal contribution.</p>}
+
+      <h2>Teaching</h2>
+      <ul class="plain">
+        {teaching.map((t: any) => <li>{t.label}, {t.org}</li>)}
+      </ul>
+
+      <h2>Professional service</h2>
+      <div class="cols">
+        {activities.service.filter((g: any) => g.cv !== false).map((g: any) => (
+          <div>
+            <p class="group">{g.group}</p>
+            <ul class="plain">{g.items.map((i: string) => <li set:html={md(i)} />)}</ul>
+          </div>
+        ))}
+      </div>
+
+      <h2>Invited talks</h2>
+      {activities.talksNote && <p class="sub" style="margin:0 0 1.2mm">{activities.talksNote}</p>}
+      <ul class="plain">
+        {activities.talks.map((t: string) => <li set:html={md(t)} />)}
+      </ul>
+
+      <h2>Selected press</h2>
+      <ul class="plain">
+        {pressed.map((p) => (
+          <li><strong>{p.data.short}</strong>: {p.data.press.map((x, i) => <><a href={x.url}>{x.name}</a>{i < p.data.press.length - 1 ? ', ' : ''}</>)}</li>
+        ))}
+      </ul>
+
+    </main>
+  </body>
+</html>

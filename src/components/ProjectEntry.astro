@@ -1,0 +1,69 @@
+---
+import Media from './Media.astro';
+import { render } from 'astro:content';
+import { topicById, clusterById, isMe, linkLabel, type Project } from '../lib/data';
+
+interface Props {
+  project: Project;
+}
+const { project } = Astro.props;
+const d = project.data;
+const { Content } = await render(project);
+const subtitle = d.title.startsWith(d.short + ':') ? d.title.slice(d.short.length + 1).trim() : d.title === d.short ? '' : d.title;
+const sortedLinks = [...d.links].sort((a, b) => (/^paper|^pdf/i.test(b.label) ? 1 : 0) - (/^paper|^pdf/i.test(a.label) ? 1 : 0));
+---
+<article
+  class="entry"
+  id={`p-${project.id}`}
+  data-tags={d.tags.join(' ')}
+  data-vision={d.vision.join(' ')}
+>
+  <Media youtube={d.youtube} image={d.image} title={d.short} />
+  <div class="entry-body">
+    <p class="entry-venue mono">
+      {d.venueUrl ? <a href={d.venueUrl} title={d.venue}>{d.venueShort}</a> : <span title={d.venue}>{d.venueShort}</span>}
+      {d.award && (
+        <span class="award">
+          <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><circle cx="8" cy="6" r="4" fill="none" stroke="currentColor" stroke-width="1.6" /><path d="M5.6 9.3 4.8 15 8 13.2 11.2 15l-.8-5.7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" /></svg>
+          {d.awardUrl ? <a href={d.awardUrl}>{d.award}</a> : d.award}
+        </span>
+      )}
+    </p>
+    <h3 class="entry-title">
+      <a href={`/projects/${project.id}/`}>{d.short}</a>
+    </h3>
+    {subtitle && <p class="entry-subtitle">{subtitle}</p>}
+    <p class="entry-authors">
+      {d.authors.map((a, i) => (
+        <>{isMe(a) ? <strong>{a}</strong> : a}{i < d.authors.length - 1 ? ', ' : ''}</>
+      ))}
+    </p>
+    {d.links.length > 0 && (
+      <ul class="entry-links">
+        {sortedLinks.map((l) => (
+          <li><a href={l.url}>{linkLabel(l.label)}</a></li>
+        ))}
+      </ul>
+    )}
+    <details class="entry-abstract">
+      <summary>Abstract</summary>
+      <div class="prose"><Content /></div>
+      {d.authorNote && <p class="note">* {d.authorNote}</p>}
+    </details>
+    {d.press.length > 0 && (
+      <p class="entry-press">
+        Featured in {d.press.map((p, i) => (
+          <><a href={p.url}>{p.name}</a>{i < d.press.length - 2 ? ', ' : i === d.press.length - 2 ? ' and ' : ''}</>
+        ))}
+      </p>
+    )}
+    <p class="entry-tags">
+      {d.tags.map((t) => (
+        <button type="button" class="tag" data-filter-topic={t}>{topicById[t].label}</button>
+      ))}
+      {d.vision.map((v) => (
+        <button type="button" class="tag tag-vision" data-filter-vision={v}>{clusterById[v].label}</button>
+      ))}
+    </p>
+  </div>
+</article>

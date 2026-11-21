@@ -1,0 +1,78 @@
+---
+import '@fontsource-variable/schibsted-grotesk';
+import '../styles/global.css';
+import { profile, absolute } from '../lib/data';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  image?: string;
+  type?: 'website' | 'article' | 'profile';
+  jsonLd?: object | object[];
+  extraHead?: string;
+}
+const { title, description, path, image, type = 'website', jsonLd, extraHead } = Astro.props;
+const canonical = absolute(path);
+const ogImage = image ? absolute(image) : absolute(profile.photo);
+const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+---
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>document.documentElement.classList.replace('no-js', 'js');</script>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="author" content={profile.fullName} />
+    <meta name="theme-color" content="#fafbfc" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable summary" />
+    <link rel="alternate" type="application/json" href="/publications.json" title="Publications (JSON)" />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content={`${profile.name}, ${profile.title}, ${profile.org}`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@mdogadogan" />
+    <link rel="preconnect" href="https://i.ytimg.com" />
+    {ld.map((obj) => <script type="application/ld+json" set:html={JSON.stringify(obj)} />)}
+    {extraHead && <Fragment set:html={extraHead} />}
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="topbar">
+      <div class="wrap topbar-inner">
+        <a class={`wordmark${path === '/' ? ' wordmark-reveal' : ''}`} href="/" aria-label={`${profile.name}, home`}>{profile.name}<span class="wordmark-phd">, PhD</span></a>
+        <nav aria-label="Sections">
+          <a href="/#publications">Publications</a>
+          <a href="/#about">About</a>
+          <a href="/#experience">Experience</a>
+          <a href="/#service">Service</a>
+          <a href="/#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="footer" id="contact">
+      <div class="wrap footer-inner">
+        <div>
+          <p class="footer-name">{profile.fullName}. {new Date().getFullYear()}.</p>
+        </div>
+        <ul class="footer-links">
+          {profile.links.filter((l: any) => l.label !== 'PhD thesis').map((l: any) => <li><a href={l.url} rel="me noopener">{l.label}</a></li>)}
+        </ul>
+      </div>
+    </footer>
+    <script>
+      import '../scripts/site.ts';
+    </script>
+  </body>
+</html>

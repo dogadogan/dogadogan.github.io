@@ -1,0 +1,87 @@
+---
+import Base from '../../layouts/Base.astro';
+import Media from '../../components/Media.astro';
+import { render } from 'astro:content';
+import { getProjects, linkLabel, profile, topicById, clusterById, isMe, summaryOf, projectImage, absolute, type Project } from '../../lib/data';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+interface Props { project: Project }
+const { project } = Astro.props;
+const d = project.data;
+const { Content } = await render(project);
+const path = `/projects/${project.id}/`;
+const pdf = d.links.find((l) => /^(paper|pdf)$/i.test(l.label) && /\.pdf($|\?)/i.test(l.url));
+const doi = d.links.find((l) => /^doi$/i.test(l.label));
+const description = summaryOf(project, 300);
+const cleanAuthors = d.authors.map((a) => a.replace(/\*$/, ''));
+
+// Highwire Press tags: read by Google Scholar and many academic crawlers.
+const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+const citation = [
+  `<meta name="citation_title" content="${esc(d.title)}">`,
+  ...cleanAuthors.map((a) => `<meta name="citation_author" content="${esc(a)}">`),
+  `<meta name="citation_publication_date" content="${d.year}">`,
+  /journal|letters|frontiers/i.test(d.venue)
+    ? `<meta name="citation_journal_title" content="${esc(d.venue)}">`
+    : `<meta name="citation_conference_title" content="${esc(d.venue)}">`,
+  pdf ? `<meta name="citation_pdf_url" content="${esc(absolute(pdf.url))}">` : '',
+  doi ? `<meta name="citation_doi" content="${esc(doi.url.replace(/^https?:\/\/(dx\.)?doi\.org\//, '').replace(/^https?:\/\/dl\.acm\.org\/doi\/(abs\/)?/, ''))}">` : '',
+].join('\n');
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ScholarlyArticle',
+  '@id': absolute(path),
+  headline: d.title,
+  name: d.short,
+  author: cleanAuthors.map((a) =>
+    isMe(a) ? { '@type': 'Person', '@id': `${profile.siteUrl}/#person`, name: profile.fullName } : { '@type': 'Person', name: a },
+  ),
+  datePublished: String(d.year),
+  isPartOf: { '@type': 'PublicationEvent', name: d.venue, url: d.venueUrl },
+  abstract: summaryOf(project, 5000),
+  keywords: [...d.tags.map((t) => topicById[t].label), ...d.vision.map((v) => clusterById[v].label)].join(', '),
+  image: projectImage(project) ? absolute(projectImage(project)!) : undefined,
+  video: d.youtube ? { '@type': 'VideoObject', name: d.title, embedUrl: `https://www.youtube.com/embed/${d.youtube}`, thumbnailUrl: `https://i.ytimg.com/vi/${d.youtube}/hqdefault.jpg`, uploadDate: `${d.year}-01-01`, description } : undefined,
+  award: d.award,
+  sameAs: d.links.filter((l) => /doi|arxiv|acm/i.test(l.url)).map((l) => l.url),
+  url: absolute(path),
+};
+---
+<Base title={`${d.title} | ${profile.name}`} description={description} path={path} image={projectImage(project)} type="article" jsonLd={jsonLd} extraHead={citation}>
+  <article class="detail wrap">
+    <p class="crumb mono"><a href={`/#p-${project.id}`}>All publications</a></p>
+    <p class="entry-venue mono">
+      {d.venueUrl ? <a href={d.venueUrl}>{d.venue}</a> : d.venue}
+      {d.award && <span class="award">{d.awardUrl ? <a href={d.awardUrl}>{d.award}</a> : d.award}</span>}
+    </p>
+    <h1 class="detail-title">{d.title}</h1>
+    <p class="entry-authors detail-authors">
+      {d.authors.map((a, i) => <>{isMe(a) ? <strong>{a}</strong> : a}{i < d.authors.length - 1 ? ', ' : ''}</>)}
+    </p>
+    {d.authorNote && <p class="note">* {d.authorNote}</p>}
+    {d.affiliation && <p class="note">{d.affiliation}</p>}
+    <Media youtube={d.youtube} image={d.image} title={d.short} size="large" eager />
+    {d.links.length > 0 && (
+      <ul class="entry-links detail-links">
+        {d.links.map((l) => <li><a href={l.url}>{linkLabel(l.label)}</a></li>)}
+      </ul>
+    )}
+    <h2 class="section-label mono">Abstract</h2>
+    <div class="prose prose-lg"><Content /></div>
+    {d.press.length > 0 && (
+      <>
+        <h2 class="section-label mono">Press</h2>
+        <ul class="plain-links">{d.press.map((p) => <li><a href={p.url}>{p.name}</a></li>)}</ul>
+      </>
+    )}
+    <h2 class="section-label mono">Topics</h2>
+    <p class="entry-tags">
+      {d.tags.map((t) => <a class="tag" href={`/?topic=${t}#publications`}>{topicById[t].label}</a>)}
+      {d.vision.map((v) => <a class="tag tag-vision" href={`/?vision=${v}#publications`}>{clusterById[v].label}</a>)}
+    </p>
+  </article>
+</Base>

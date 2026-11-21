@@ -1,0 +1,57 @@
+# Conference service, invited talks, and photo moments. Markdown links allowed in `text`.
+service:
+  - group: Organizing committee
+    items:
+      - "Steering Committee Member: [ACM SCF](https://scf.acm.org/)"
+      - "Conference Chair: ACM SCF ([’26](https://scf.acm.org/2026/))"
+      - "Posters Chair: ACM UIST ([’22](https://uist.acm.org/uist2022/), [’23](https://uist.acm.org/2023/))"
+      - "Student Volunteer Chair: ACM UIST ([’19](https://uist.acm.org/uist2019/), [’20](https://uist.acm.org/uist2020/))"
+      - "Social Events Chair: ACM UIST ([’21](https://uist.acm.org/uist2021/))"
+      - "Organizer: ACM CHI Personal Fabrication Community Event ([’20](https://hcie.csail.mit.edu/events/chi20fab/))"
+  - group: Program committee
+    items:
+      - "Subcommittee Chair, ACM DIS, “Artifacts and Systems” ([’26](https://dis.acm.org/2026/))"
+      - "Associate Chair, ACM CHI ([’27](https://chi2027.acm.org/); [’26](https://chi2026.acm.org/), “Blending Interaction: Engineering Interactive Systems & Tools” subcommittee)"
+      - "Associate Chair, ACM UIST ([’25](https://uist.acm.org/2025/), [’26](https://uist.acm.org/2026/))"
+      - "Associate Chair, ACM TEI ([’24](https://tei.acm.org/2024/))"
+  - group: Reviewing
+    items:
+      - "ACM CHI (’20, ’21, ’22, ’23)"
+      - "ACM UIST (’21, ’22)"
+      - "ACM SIGGRAPH Asia (’22)"
+      - "IEEE ICRA (’21)"
+      - "ACM TEI (’21)"
+      - "IEEE ISMAR (’20)"
+      - "ACM EICS (’21)"
+      - "ACM IDC WIP (’21)"
+      - "IEEE Sensors Journal (’20, ’21)"
+  - group: Student volunteer
+    cv: false   # shown on the website only
+    items:
+      - "[ACM UIST 2018](https://uist.acm.org/uist2018/), Berlin, Germany"
+      - "[ACM UIST 2017](https://uist.acm.org/uist2017/), Quebec City, Canada"
+      - "[TechCrunch Sessions: Robotics 2017](https://techcrunch.com/event-info/sessions-robotics/), Boston, MA"
+
+talksNote: This list is not up to date.
+talks:
+  - "MIT Sloan, Machine Intelligence for Manufacturing and Operations (MIMO) Research Forum (Dec ’22)"
+  - "University of Maryland HCIL BBL Speaker Series ([Oct ’22](https://www.youtube.com/watch?v=bynE85uCaFo))"
+  - "Samsung America Research, Mountain View (Jul ’22)"
+  - "UC San Diego Design Lab (Aug ’22)"
+  - "Stanford University HCI Lunch Seminar (Jun ’22)"
+  - "University College London, Virtual Graphics and Computer Graphics Seminar Series (Feb ’22)"
+  - "MIT Open Learning, MIT Horizon Talks (Mar ’22)"
+  - "University of Chicago, Human-Computer Integration Lab (Sep ’19)"
+
+moments:
+  - { src: /images/moments/brunch-sidpac-rafael-reif-mit-president.jpg, caption: "MIT President L. Rafael Reif and Sr. Associate Dean Blanche Staton help Sidney-Pacific officers prepare Sunday brunch (Cambridge, MA, 2019)" }
+  - { src: /images/moments/mit-csail-hcie-brunch.jpg, caption: "MIT CSAIL HCI Engineering group brunch" }
+  - { src: /images/moments/uist-2018-berlin-student-volunteers-sv.jpg, caption: "UIST 2018 student volunteers (Berlin)" }
+  - { src: /images/moments/bogazici-university-commencement-student-speaker.jpg, caption: "Student speaker at Boğaziçi University commencement" }
+  - { src: /images/moments/bogazici-university-senior-design-project-award.jpg, caption: "Boğaziçi University senior design project award" }
+  - { src: /images/moments/MIT-CSAIL.jpg, caption: "MIT CSAIL" }
+  - { src: /images/moments/UIST2017-SVs.jpg, caption: "UIST 2017 student volunteers (Quebec City)" }
+  - { src: /images/moments/Best-Medical-Robotics-Paper-Award.jpg, caption: "ICRA 2017 Best Medical Robotics Paper Award nomination" }
+  - { src: /images/moments/LEMUR.jpeg, caption: "UCLA LEMUR lab" }
+  - { src: /images/moments/MPI-IS.jpg, caption: "Max Planck Institute for Intelligent Systems" }
+  - { src: /images/moments/IEEE-Exemplary-SB.jpg, caption: "IEEE Exemplary Student Branch award" }

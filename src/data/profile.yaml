@@ -1,0 +1,62 @@
+# Basic profile. Used in the page header, the bio section, JSON-LD and llms.txt.
+name: Doğa Doğan
+fullName: Mustafa Doğa Doğan
+asciiName: Mustafa Doga Dogan
+title: Research Scientist
+org: Adobe Research
+orgUrl: https://research.adobe.com/
+lab: AI Experiences Lab
+location: Basel, Switzerland
+locationUrl: https://maps.app.goo.gl/Kqr8K8f3warN68YG7
+photo: /images/profile/Mustafa-Doga-Dogan.jpg
+email: doga [at] {adobe.com, mit.edu, csail.mit.edu, acm.org, ieee.org}
+cvEmail: doga [at] {mit.edu, csail.mit.edu, acm.org}   # shown on the CV
+siteUrl: https://www.dogadogan.com
+
+thesis: Designing a world AI can understand
+thesisLong: "Grounded intelligence across digital and physical realms."
+
+# One-paragraph summary: shown under the name, used as the meta description (links and logos are stripped there).
+# ![](/path) inside a link renders a small inline logo before the link text.
+summary: >-
+  I am a Research Scientist at [![](/images/logos/AdobeResearch.jpg)Adobe Research](https://research.adobe.com/) in Basel, Switzerland, working in the AI Experiences Lab.
+  I received my PhD from [![](/images/logos/MIT-1.png)Massachusetts Institute of Technology](https://www.mit.edu/), where I worked in the [![](/images/logos/csail.svg)Computer Science & Artificial Intelligence Laboratory](https://www.csail.mit.edu/).
+  I build systems that make the world legible to AI: agent-driven tools for an AI-first information ecosystem,
+  and unobtrusive metadata that gives physical objects a machine-readable identity.
+
+# Longer bio (Markdown allowed). Shown in the "About" section.
+bio: |
+  My research is driven by a fundamental shift in how people access information: we are moving beyond websites and search engines toward LLMs, personal AI agents, and spatial computing platforms. In this new paradigm, AI systems become the primary interface to knowledge. *How can these emerging interfaces deliver reliable, context-aware information anywhere, at any moment?*
+
+  I investigate this question through the lens of **grounded ubiquitous intelligence**: designing systems, objects, and infrastructures that make the world legible to AI. My work spans two complementary directions.
+
+  **1. GenAI- and agent-driven tools for next-generation information access.** At Adobe, I design systems that help organizations and creators adapt to an AI-first information ecosystem. This includes [Adobe LLM Optimizer](https://business.adobe.com/products/llm-optimizer.html) and Sites Optimizer, which support content quality and discoverability in LLM-dominated environments, i.e., the emerging field of [generative engine optimization (GEO)](https://business.adobe.com/blog/introducing-adobe-llm-optimizer). I also develop interfaces for agentic AI and synthetic personas, such as Adobe's [Project Face Off](https://www.youtube.com/watch?v=0MA5ouSlqiY) (Adobe Summit '26 Best Sneak award) and [Project Get Savvy](https://research.adobe.com/news/the-research-behind-project-get-savvy/), and explore multimodal, contextual AI+AR interactions, e.g., [augmented object intelligence](https://github.com/google/xr-objects).
+
+  **2. Metadata-driven intelligence and interaction for everyday, real-world objects.** During my PhD at MIT CSAIL, I developed new ways for physical objects to carry unobtrusive metadata that AI systems can interpret with high reliability. This line of work, [ubiquitous metadata](https://dspace.mit.edu/handle/1721.1/153872), includes systems such as G-ID, InfraredTags, BrightMarker, and Imprinto, which embed machine-readable information directly into materials. This allows AI and AR systems to perceive objects with guarantees that vision-only algorithms cannot achieve.
+
+  Across both directions, my goal is to build AI systems that support the future of information access and fluidly connect digital and physical contexts, as part of a broader shift toward truly ubiquitous and grounded intelligence.
+
+  I regularly collaborate with interdisciplinary teams and present my findings at major computer science and human-computer interaction (HCI) venues. To discuss projects or collaborations, please reach out by email.
+
+pronunciation: >-
+  Doğa (/ˈdoʊ.a/). The [ğ](https://en.wikipedia.org/wiki/%C4%9E) in my name is silent, so pronounce it like
+  "Noah" but with a D. The same goes for my last name.
+
+# Research interests, used for JSON-LD "knowsAbout".
+knowsAbout:
+  - Human-computer interaction
+  - Generative AI and AI agents
+  - Generative engine optimization (GEO)
+  - Augmented and extended reality
+  - Personal and digital fabrication
+  - Ubiquitous metadata and embedded markers
+  - Computer vision and sensing
+
+links:
+  - { label: Google Scholar, url: "https://scholar.google.com/citations?user=Lj4s3gEAAAAJ&hl=en" }
+  - { label: LinkedIn, url: "https://www.linkedin.com/in/dogadogan/" }
+  - { label: X / Twitter, url: "https://twitter.com/mdogadogan" }
+  - { label: GitHub, url: "https://github.com/dogadogan" }
+  - { label: Adobe profile, url: "https://research.adobe.com/person/doga-dogan/" }
+  - { label: MIT profile, url: "https://sites.mit.edu/doga/" }
+  - { label: PhD thesis, url: "https://dspace.mit.edu/handle/1721.1/153872" }

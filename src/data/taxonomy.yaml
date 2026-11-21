@@ -1,0 +1,100 @@
+# Topics: the filter chips above the project list. A project can have several.
+# `axis` places the topic on the digital <-> physical spectrum (informational).
+topics:
+  - id: ai-agents
+    label: AI & agents
+    axis: digital
+  - id: xr
+    label: AR / XR
+    axis: both
+  - id: fabrication
+    label: Fabrication
+    axis: physical
+  - id: metadata
+    label: Embedded metadata
+    axis: physical
+  - id: sensing
+    label: Sensing & tracking
+    axis: both
+  - id: design-tools
+    label: Design & creativity tools
+    axis: digital
+  - id: robotics
+    label: Robotics
+    axis: physical
+
+# Vision themes and clusters: the two panels of the vision diagram (design/vision.svg).
+# `svgGroup` is the <g id="..."> of that cluster in the Illustrator export.
+# `intro`, `description`, `items` and `award` mirror the diagram's text; they are used for the
+# phone-sized HTML version of the diagram (the SVG is too small to read on phones).
+# Keep them in sync when you edit the illustration.
+themes:
+  - id: ai-first
+    label: AI-first information access
+    svgGroup: header_pill
+    alsoGroups: [digital_device, digital_label]
+    axis: digital
+    intro: GenAI- and agent-driven tools that help people **discover, evaluate, and act** in an AI-first world.
+    clusters:
+      - id: agentic
+        label: Agentic interfaces & content optimization
+        svgGroup: cluster_agentic
+        description: Drive interfaces with agents. Surface content in AI answers.
+        items: ["Adobe LLM Optimizer", "Sites Optimizer", "Project Get Savvy", "UI Remix|IUI '26", "XAgen|Design & AI '26"]
+      - id: synthetic
+        label: Synthetic user evaluation
+        svgGroup: cluster_synthetic
+        description: Simulate users to evaluate designs pre-launch.
+        items: ["Adobe Project Face Off", "UXCascade|UIST '26"]
+        award: Adobe Summit 2026 Best Sneak winner
+      - id: ai-ar
+        label: AI + AR
+        svgGroup: cluster_ai_ar
+        description: Turn any object into an AI interaction portal.
+        items: ["XR-Objects|UIST '24", "RAMPA|RA-L '25"]
+        award: 2025 SXSW Innovation Awards Finalist
+  - id: physical-metadata
+    label: Metadata for the physical world
+    svgGroup: header_pill_2
+    alsoGroups: [physical_objects, physical_label]
+    axis: physical
+    intro: Unobtrusive metadata that gives everyday objects a **reliable, machine-readable identity**, beyond computer vision.
+    clusters:
+      - id: natural
+        label: Natural markers
+        svgGroup: marker_natural
+        description: Read intrinsic material and surface signatures.
+        items: ["SensiCut|UIST '21", "SpecTrack|SIGGRAPH Asia Posters '24"]
+        award: Best Poster Honorable Mention
+      - id: structural
+        label: Structural markers
+        svgGroup: marker_structural
+        description: Hide data in fabrication artifacts and joints.
+        items: ["G-ID|CHI '20", "StructCode|SCF '23"]
+      - id: interior
+        label: Interior markers
+        svgGroup: marker_interior
+        description: Embed invisible, machine-only readable tags.
+        items: ["InfraredTags|CHI '22", "BrightMarker|UIST '23", "InvisIto|UIST '26"]
+        award: Best Demo Honorable Mention
+
+# Names that appear in bold in the vision diagram. Values are a project slug
+# (links to that project's entry) or a full URL (opens externally).
+svgLinks:
+  Adobe LLM Optimizer: https://business.adobe.com/products/llm-optimizer.html
+  Sites Optimizer: https://business.adobe.com/products/llm-optimizer.html
+  Project Get Savvy: https://research.adobe.com/news/the-research-behind-project-get-savvy/
+  UI Remix: ui-remix
+  XAgen: xagen
+  Adobe Project Face Off: project-face-off
+  SimAB: project-face-off
+  UXCascade: uxcascade
+  XR-Objects: xr-objects
+  RAMPA: rampa
+  SensiCut: sensicut
+  SpecTrack: spectrack
+  G-ID: g-id
+  StructCode: structcode
+  InfraredTags: infraredtags
+  BrightMarker: brightmarker
+  InvisIto: invisito

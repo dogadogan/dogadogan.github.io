@@ -1,0 +1,43 @@
+---
+// Click-to-load YouTube: ships a thumbnail + link (crawlable, works without JS).
+// site.ts swaps in a privacy-friendly youtube-nocookie iframe on click.
+import { youtubeThumb } from '../lib/data';
+interface Props {
+  youtube?: string;
+  image?: string;
+  title: string;
+  eager?: boolean;
+  size?: 'card' | 'large';
+}
+const { youtube, image, title, eager = false, size = 'card' } = Astro.props;
+const loading = eager ? 'eager' : 'lazy';
+---
+{youtube ? (
+  <div class={`media media-${size}`}>
+    <a
+      class="yt"
+      href={`https://www.youtube.com/watch?v=${youtube}`}
+      data-yt={youtube}
+      data-title={title}
+      aria-label={`Play video: ${title}`}
+    >
+      <img
+        src={image ?? youtubeThumb(youtube)}
+        alt=""
+        width="480"
+        height="270"
+        loading={loading}
+        decoding="async"
+      />
+      <span class="yt-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor" /></svg>
+      </span>
+    </a>
+  </div>
+) : image ? (
+  <div class={`media media-${size}`}>
+    <img src={image} alt={`Teaser figure for ${title}`} width="480" height="270" loading={loading} decoding="async" />
+  </div>
+) : (
+  <div class={`media media-${size} media-empty`} aria-hidden="true" />
+)}

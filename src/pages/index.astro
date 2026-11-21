@@ -1,0 +1,211 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectEntry from '../components/ProjectEntry.astro';
+import VisionCards from '../components/VisionCards.astro';
+import visionSvg from '../generated/vision.svg?raw';
+import { profile, taxonomy, cv, activities, getProjects, md, plain, absolute, summaryOf, projectImage } from '../lib/data';
+
+const projects = await getProjects();
+const years = [...new Set(projects.map((p) => p.data.year))];
+const topicCounts = Object.fromEntries(taxonomy.topics.map((t: any) => [t.id, projects.filter((p) => p.data.tags.includes(t.id)).length]));
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${profile.siteUrl}/#person`,
+  name: profile.fullName,
+  alternateName: [profile.name, profile.asciiName, 'Doga Dogan'],
+  honorificSuffix: 'PhD',
+  jobTitle: profile.title,
+  worksFor: { '@type': 'Organization', name: 'Adobe', department: `${profile.org}, ${profile.lab}`, url: profile.orgUrl },
+  workLocation: { '@type': 'Place', name: profile.location },
+  alumniOf: [
+    { '@type': 'CollegeOrUniversity', name: 'Massachusetts Institute of Technology' },
+    { '@type': 'CollegeOrUniversity', name: 'Boğaziçi University' },
+  ],
+  image: absolute(profile.photo),
+  url: profile.siteUrl,
+  description: plain(profile.summary),
+  knowsAbout: profile.knowsAbout,
+  sameAs: profile.links.filter((l: any) => l.label !== 'PhD thesis').map((l: any) => l.url),
+};
+const list = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: `Research projects and publications by ${profile.fullName}`,
+  itemListElement: projects.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'ScholarlyArticle',
+      '@id': absolute(`/projects/${p.id}/`),
+      url: absolute(`/projects/${p.id}/`),
+      headline: p.data.title,
+      author: p.data.authors.map((a) => ({ '@type': 'Person', name: a.replace(/\*$/, '') })),
+      datePublished: String(p.data.year),
+      isPartOf: p.data.venue,
+      abstract: summaryOf(p, 400),
+      image: projectImage(p),
+    },
+  })),
+};
+---
+<Base
+  title={`${profile.name}, PhD | ${profile.title} at ${profile.org}`}
+  description={plain(profile.summary)}
+  path="/"
+  type="profile"
+  jsonLd={[person, list]}
+>
+  <section class="hero wrap">
+    <div class="hero-text">
+      <h1 class="hero-name">{profile.fullName}<span class="hero-phd">, PhD</span></h1>
+      <p class="hero-thesis">{profile.thesis}.</p>
+      <p class="hero-summary" set:html={md(profile.summary)} />
+      <ul class="hero-links">
+        {profile.links.slice(0, 5).map((l: any) => <li><a href={l.url} rel="me noopener">{l.label}</a></li>)}
+        <li><a href="/Mustafa-Doga-Dogan-CV.pdf" class="cv-link" target="_blank" rel="noopener">CV</a></li>
+      </ul>
+    </div>
+    <img class="hero-photo" src={profile.photo} alt={`Portrait of ${profile.fullName}`} width="640" height="640" fetchpriority="high" />
+  </section>
+
+  <section class="vision wrap" aria-labelledby="vision-heading">
+    <div class="vision-head">
+      <h2 id="vision-heading" class="section-label mono">Research vision</h2>
+      <p class="vision-hint"><span class="js-only">click a theme to filter publications</span></p>
+    </div>
+    <div class="vision-root" data-vision-root>
+      <div class="vision-frame">
+        <Fragment set:html={visionSvg} />
+      </div>
+      <VisionCards />
+    </div>
+  </section>
+
+  <section class="work wrap" id="publications" aria-labelledby="work-heading">
+    <div class="work-head">
+      <h2 id="work-heading" class="section-title">Publications</h2>
+    </div>
+
+    <div class="filters js-only" role="toolbar" aria-label="Filter projects">
+      <div class="chips">
+        <button type="button" class="chip" data-filter-topic="" aria-pressed="true">All <span class="chip-n">{projects.length}</span></button>
+        {taxonomy.topics.map((t: any) => (
+          <button type="button" class="chip" data-filter-topic={t.id} aria-pressed="false">
+            {t.label} <span class="chip-n">{topicCounts[t.id]}</span>
+          </button>
+        ))}
+      </div>
+      <div class="filter-status">
+        <span class="vision-pill" hidden>
+          <span class="vision-pill-label"></span>
+          <button type="button" class="vision-clear" aria-label="Clear direction filter">×</button>
+        </span>
+        <output class="count mono" aria-live="polite">{projects.length} publications</output>
+      </div>
+    </div>
+
+    <div class="years">
+      {years.map((y) => (
+        <section class="year" data-year={y} aria-label={`${y}`}>
+          <h3 class="year-label mono">{y}</h3>
+          <div class="year-entries">
+            {projects.filter((p) => p.data.year === y).map((p) => <ProjectEntry project={p} />)}
+          </div>
+        </section>
+      ))}
+    </div>
+    <p class="empty" hidden>No publications match this combination. <button type="button" class="reset">Show all publications</button></p>
+  </section>
+
+  <section class="about wrap" id="about" aria-labelledby="about-heading">
+    <h2 id="about-heading" class="section-title">About</h2>
+    <div class="about-grid">
+      <div class="prose prose-lg" set:html={md(profile.bio)} />
+      <aside class="about-aside">
+        <h3 class="section-label mono">How to pronounce my name</h3>
+        <p set:html={md(profile.pronunciation)} />
+        <h3 class="section-label mono">Elsewhere</h3>
+        <ul class="plain-links">
+          {profile.links.map((l: any) => <li><a href={l.url} rel="me noopener">{l.label}</a></li>)}
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="cv wrap" id="experience" aria-labelledby="exp-heading">
+    <div class="cv-col">
+      <h2 id="exp-heading" class="section-title">Experience</h2>
+      <ol class="timeline">
+        {cv.experience.map((e: any) => (
+          <li class="tl-item">
+            <img class="tl-logo" src={e.logo} alt="" width="36" height="36" loading="lazy" />
+            <div>
+              <p class="tl-role"><strong>{e.role}</strong>, {e.org}</p>
+              <p class="tl-units">
+                {e.units.map((u: any, i: number) => <>{u.url ? <a href={u.url}>{u.label}</a> : u.label}{i < e.units.length - 1 ? ' · ' : ''}</>)}
+              </p>
+              {e.people && (
+                <p class="tl-people">{e.people.label}: {e.people.names.map((n: any, i: number) => <>{n.url ? <a href={n.url}>{n.name}</a> : n.name}{i < e.people.names.length - 1 ? ', ' : ''}</>)}</p>
+              )}
+              {e.teaching && (
+                <ul class="tl-teaching">
+                  {e.teaching.map((t: any) => <li>{t.url ? <a href={t.url}>{t.label}</a> : t.label}</li>)}
+                </ul>
+              )}
+              <p class="tl-place mono">{e.place}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+    <div class="cv-col">
+      <h2 class="section-title" id="education">Education</h2>
+      <ol class="timeline">
+        {cv.education.map((e: any) => (
+          <li class="tl-item">
+            <img class="tl-logo" src={e.logo} alt="" width="36" height="36" loading="lazy" />
+            <div>
+              <p class="tl-role"><strong>{e.degree}</strong></p>
+              <p class="tl-units">{e.org}</p>
+              {e.note && <p class="tl-people" set:html={md(e.note)} />}
+              <p class="tl-place mono">{e.years} · {e.place}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <h2 class="section-title" id="talks">Invited talks</h2>
+      {activities.talksNote && <p class="section-note">{activities.talksNote}</p>}
+      <ul class="bullets">
+        {activities.talks.map((t: string) => <li set:html={md(t)} />)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="service wrap" id="service" aria-labelledby="service-heading">
+    <h2 id="service-heading" class="section-title">Service</h2>
+    <div class="service-grid">
+      {activities.service.map((g: any) => (
+        <div>
+          <h3 class="section-label mono">{g.group}</h3>
+          <ul class="bullets">{g.items.map((i: string) => <li set:html={md(i)} />)}</ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="moments" aria-labelledby="moments-heading">
+    <div class="wrap"><h2 id="moments-heading" class="section-title">Moments</h2></div>
+    <ul class="moments-strip">
+      {activities.moments.map((m: any) => (
+        <li>
+          <figure>
+            <img src={m.src} alt={m.caption} width="768" height="600" loading="lazy" decoding="async" />
+            <figcaption>{m.caption}</figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Base>

@@ -1,0 +1,60 @@
+---
+// Phone-sized version of the vision diagram, built from src/data/taxonomy.yaml.
+// Same data attributes as the SVG, so the same filter script drives both.
+import { taxonomy, md } from '../lib/data';
+
+const link = (name: string) => {
+  const target = taxonomy.svgLinks[name];
+  if (!target) return { href: undefined, external: false };
+  const external = /^https?:/.test(target);
+  return { href: external ? target : `#p-${target}`, external, project: external ? undefined : target };
+};
+---
+<div class="vcards">
+  {taxonomy.themes.map((th: any, i: number) => (
+    <>
+      <section class={`vtheme vtheme-${th.axis}`}>
+        <button type="button" class="vtheme-pill v-theme" data-theme={th.id} aria-pressed="false">
+          <span class="vtheme-n">{i + 1}</span>{th.label}
+        </button>
+        <p class="vtheme-intro" set:html={md(th.intro)} />
+        <ul class="vclusters">
+          {th.clusters.map((c: any, j: number) => (
+            <li>
+              <div class="vcluster v-cluster" data-vision={c.id} data-theme={th.id} role="button" tabindex="0" aria-pressed="false">
+                <p class="vcluster-title"><span class="vcluster-letter">{'abc'[j]}</span>{c.label}</p>
+                <p class="vcluster-desc">{c.description}</p>
+                <p class="vcluster-items">
+                  {c.items.map((it: string, k: number) => {
+                    const [name, venue] = it.split('|');
+                    const l = link(name);
+                    return (
+                      <>
+                        {l.href ? (
+                          <a href={l.href} class="v-link" data-project={l.project} target={l.external ? '_blank' : undefined} rel={l.external ? 'noopener' : undefined}>{name}</a>
+                        ) : (
+                          <strong>{name}</strong>
+                        )}
+                        {venue && <span class="vcluster-venue"> ({venue})</span>}
+                        {k < c.items.length - 1 ? ', ' : ''}
+                      </>
+                    );
+                  })}
+                </p>
+                {c.award && <p class="vcluster-award">{c.award}</p>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+      {i === 0 && (
+        <p class="vloop" aria-label="A reinforcing loop between digital and physical contexts">
+          <span class="vloop-digital">digital</span>
+          <span class="vloop-arrows" aria-hidden="true">⇅</span>
+          <span class="vloop-physical">physical</span>
+          <span class="vloop-note">A reinforcing loop: better understanding ↔ better experiences, anywhere.</span>
+        </p>
+      )}
+    </>
+  ))}
+</div>

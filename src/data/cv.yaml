@@ -1,0 +1,128 @@
+# Most recent first.
+experience:
+  - role: Research Scientist
+    org: Adobe
+    logo: /images/logos/AdobeResearch.jpg
+    units:
+      - { label: AI Experiences Lab, url: "https://research.adobe.com/research/human-computer-interaction/" }
+      - { label: Research Division, url: "https://research.adobe.com/" }
+    place: Basel, Switzerland
+  - role: Visiting Postdoctoral Researcher
+    org: University of Tokyo
+    logo: /images/logos/UTokyo_logo.png
+    units:
+      - { label: User Interface Research Group, url: "https://www-ui.is.s.u-tokyo.ac.jp/en/projects/" }
+      - { label: Graduate School of Information Science and Technology, url: "https://www.i.u-tokyo.ac.jp/index_e.shtml" }
+    people: { label: Collaborator, names: [{ name: Takeo Igarashi, url: "https://scholar.google.com/citations?user=2LJJtI8AAAAJ&hl=en" }] }
+    place: Tokyo, Japan
+  - role: Visiting Postdoctoral Researcher
+    org: TU Delft
+    logo: /images/logos/TUDelft_logo.png
+    units:
+      - { label: Department of Sustainable Design Engineering, url: "https://www.tudelft.nl/io/over-io/afdelingen/sustainable-design-engineering" }
+      - { label: Faculty of Industrial Design Engineering, url: "https://www.tudelft.nl/en/ide" }
+    people: { label: Collaborator, names: [{ name: Zjenja Doubrovski, url: "https://www.tudelft.nl/io/over-io/personen/doubrovski-el" }] }
+    place: Delft, Netherlands
+  - role: Postdoctoral Researcher & Lecturer
+    org: Boğaziçi University
+    logo: /images/logos/Bogazici.png
+    units:
+      - { label: Cognitive Learning and Robotics (COLORS) Lab, url: "https://colors.cmpe.boun.edu.tr/" }
+      - { label: Computer Engineering Department, url: "https://www.cmpe.boun.edu.tr/" }
+    people: { label: Collaborator, names: [{ name: Emre Ugur, url: "https://www.cmpe.boun.edu.tr/~emre/" }] }
+    teaching:
+      - { label: "CMPE 58K: Engineering Interactive Systems (Spring 2024, first offering)", url: "/cmpe58k/" }
+    place: Istanbul, Turkey
+  - role: PhD Student Researcher
+    org: Google
+    logo: /images/logos/Google_logo.png
+    units:
+      - { label: Augmented Reality (AR/VR), url: "https://arvr.google.com/" }
+      - { label: Research Division, url: "https://research.google/" }
+    people: { label: Advisors, names: [{ name: David Kim, url: "https://davidkim.de/" }, { name: Mar Gonzalez-Franco, url: "https://margonzalezfranco.github.io/" }] }
+    place: Zurich, Switzerland
+  - role: Research Scientist Intern
+    org: Adobe
+    logo: /images/logos/AdobeResearch.jpg
+    units:
+      - { label: Document Intelligence Lab, url: "https://research.adobe.com/research/document-intelligence/" }
+      - { label: Research Division, url: "https://research.adobe.com/" }
+    people: { label: Advisors, names: [{ name: Alexa Siu, url: "https://alexasiu.com/" }, { name: Tong Sun, url: "https://research.adobe.com/person/tong-sun/" }] }
+    place: San Jose, CA
+  - role: Research Assistant
+    org: Massachusetts Institute of Technology (MIT)
+    logo: /images/logos/MIT-1.png
+    units:
+      - { label: Computer Science and Artificial Intelligence Lab (CSAIL), url: "https://www.csail.mit.edu/" }
+      - { label: HCI Engineering Group, url: "https://hcie.csail.mit.edu/" }
+    people: { label: Advisor, names: [{ name: Stefanie Mueller, url: "https://stefaniemueller.org/" }] }
+    place: Cambridge, MA
+  - role: Teaching Assistant
+    org: Massachusetts Institute of Technology (MIT)
+    logo: /images/logos/MIT-1.png
+    units:
+      - { label: Department of Electrical Engineering and Computer Science, url: "https://www.eecs.mit.edu/" }
+    teaching:
+      - { label: "6.859: Interactive Data Visualization (Spring 2021)", url: "http://vis.csail.mit.edu/classes/6.859/" }
+      - { label: "6.S897: Academic Job Search Seminar (Fall 2021)", url: "http://courses.csail.mit.edu/6.s897/" }
+      - { label: "6.810: Engineering Interactive Technologies (Fall 2020)", url: "https://hcie.csail.mit.edu/classes/2021-fall-6810/6810-engineering-interactive-technologies.html" }
+    place: Cambridge, MA
+  - role: Visiting Researcher
+    org: Massachusetts Institute of Technology (MIT)
+    logo: /images/logos/MIT-1.png
+    units:
+      - { label: Computer Science and Artificial Intelligence Lab (CSAIL), url: "https://www.csail.mit.edu/" }
+      - { label: HCI Engineering Group, url: "https://hcie.csail.mit.edu/" }
+    people: { label: Advisor, names: [{ name: Stefanie Mueller, url: "https://stefaniemueller.org/" }] }
+    place: Cambridge, MA
+  - role: Research Assistant
+    org: Max Planck Institute for Intelligent Systems
+    logo: /images/logos/MPI2.png
+    units:
+      - { label: Physical Intelligence Department, url: "https://pi.is.mpg.de/" }
+      - { label: Medical Millirobots Group }
+    people: { label: Advisor, names: [{ name: Metin Sitti, url: "https://www.is.mpg.de/sitti" }] }
+    place: Stuttgart, Germany
+  - role: Undergraduate Researcher
+    org: UCLA
+    logo: /images/logos/UCLA-3.png
+    units:
+      - { label: Electrical and Computer Engineering, url: "http://ee.ucla.edu/" }
+      - { label: Laboratory for Embedded Machines and Ubiquitous Robots, url: "https://uclalemur.com/" }
+    people: { label: Advisor, names: [{ name: Ankur Mehta, url: "http://www.ee.ucla.edu/ankur-mehta/" }] }
+    place: Los Angeles, CA
+  - role: Undergraduate Researcher & Teaching Assistant
+    org: Boğaziçi University
+    logo: /images/logos/Bogazici.png
+    units:
+      - { label: Haptics & Robotics Lab, url: "http://haptics.boun.edu.tr/" }
+      - { label: Intelligent Systems Lab, url: "http://isl.ee.boun.edu.tr/wp/wordpress/" }
+    people: { label: Advisors, names: [{ name: Evren Samur }, { name: Işıl Bozma, url: "http://isl.ee.boun.edu.tr/people/isil/index.html" }] }
+    teaching:
+      - { label: "EE142: Introduction to Digital Systems (Fall 2016 & Fall 2017)" }
+    place: Istanbul, Turkey
+
+education:
+  - degree: Ph.D. in Electrical Engineering & Computer Science
+    years: "2018-2024"
+    org: Massachusetts Institute of Technology (MIT)
+    logo: /images/logos/MIT-1.png
+    place: Cambridge, MA
+    note: 'Thesis: [Ubiquitous Metadata: Design and Fabrication of Embedded Markers for Real-World Object Identification and Interaction](https://dspace.mit.edu/handle/1721.1/153872)'
+  - degree: M.Sc. in Electrical Engineering & Computer Science
+    years: "2018-2020"
+    org: Massachusetts Institute of Technology (MIT)
+    logo: /images/logos/MIT-1.png
+    place: Cambridge, MA
+    note: Past chair of the [MIT European Club](https://euroclub.mit.edu/) and [Career Fair](https://euro-career.mit.edu/) (2020-21)
+  - degree: B.Sc. in Electrical & Electronics Engineering
+    years: "2014-2018"
+    org: Boğaziçi University
+    logo: /images/logos/Bogazici.png
+    place: Istanbul, Turkey
+    note: Past chair of the [IEEE Student Branch](http://buecieee.com/en/) (2015-16)
+  - degree: Exchange student, Electrical and Computer Engineering
+    years: "2017"
+    org: University of California, Los Angeles (UCLA)
+    logo: /images/logos/UCLA-3.png
+    place: Los Angeles, CA
