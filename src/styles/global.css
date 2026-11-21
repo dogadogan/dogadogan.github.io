@@ -199,11 +199,14 @@ a:hover .inline-logo, a:focus-visible .inline-logo { filter: none; }
 .vcluster-items a, .vcluster-items strong { font-weight: 700; color: #3f4a5c; }
 .vcluster-award { font-size: 0.78rem; font-weight: 700; color: #b07d1a; margin-top: 0.3rem !important; }
 .vcluster-award::before { content: '★ '; }
-.vloop { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.25rem 0.6rem; margin: 0.25rem 0; font-size: 0.9rem; font-weight: 700; text-align: center; }
+.vloop { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 1rem; margin: 0.4rem 0.75rem; }
+.vloop p { margin: 0; }
+.vloop-stack { display: flex; flex-direction: column; align-items: center; gap: 0.1rem; font-size: 0.9rem; font-weight: 700; }
 .vloop-digital { color: var(--digital); }
 .vloop-physical { color: var(--physical); }
-.vloop-arrows { color: #cba36a; font-size: 1.1rem; }
-.vloop-note { flex-basis: 100%; font-weight: 400; font-size: 0.8rem; color: var(--ink-3); }
+.vloop-arrows { color: #cba36a; display: block; }
+.vloop-note { font-size: 0.82rem; line-height: 1.45; color: var(--ink-3); }
+.vloop-lr { display: inline-block; vertical-align: -0.1em; color: var(--ink-3); margin: 0 0.1em; }
 .has-selection .vcluster:not(.is-lit), .has-selection .vtheme-pill:not(.is-lit) { opacity: 0.4; }
 
 /* ---------- Work ---------- */

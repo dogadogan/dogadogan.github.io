@@ -48,12 +48,18 @@ const link = (name: string) => {
         </ul>
       </section>
       {i === 0 && (
-        <p class="vloop" aria-label="A reinforcing loop between digital and physical contexts">
-          <span class="vloop-digital">digital</span>
-          <span class="vloop-arrows" aria-hidden="true">⇅</span>
-          <span class="vloop-physical">physical</span>
-          <span class="vloop-note">A reinforcing loop: better understanding ↔ better experiences, anywhere.</span>
-        </p>
+        <div class="vloop">
+          <p class="vloop-stack" aria-label="digital and physical, in a loop">
+            <span class="vloop-digital">digital</span>
+            <svg class="vloop-arrows" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 20V5M8 5 4.5 8.5M8 5l3.5 3.5M16 4v15m0 0-3.5-3.5M16 19l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            <span class="vloop-physical">physical</span>
+          </p>
+          <p class="vloop-note">
+            A reinforcing loop: better understanding
+            <svg class="vloop-lr" viewBox="0 0 24 12" width="22" height="11" role="img" aria-label="leads to and from"><path d="M3 6h18M3 6l3.5-3.5M3 6l3.5 3.5M21 6l-3.5-3.5M21 6l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            better experiences, anywhere.
+          </p>
+        </div>
       )}
     </>
   ))}

@@ -59,7 +59,7 @@ const list = {
 >
   <section class="hero wrap">
     <div class="hero-text">
-      <h1 class="hero-name">{profile.fullName}<span class="hero-phd">, PhD</span></h1>
+      <h1 class="hero-name">{profile.heroName ?? profile.fullName}<span class="hero-phd">, PhD</span></h1>
       <p class="hero-thesis">{profile.thesis}.</p>
       <p class="hero-summary" set:html={md(profile.summary)} />
       <ul class="hero-links">
@@ -155,7 +155,7 @@ const list = {
                   {e.teaching.map((t: any) => <li>{t.url ? <a href={t.url}>{t.label}</a> : t.label}</li>)}
                 </ul>
               )}
-              <p class="tl-place mono">{e.place}</p>
+              <p class="tl-place mono">{e.dates ? `${e.dates} · ` : ''}{e.place}</p>
             </div>
           </li>
         ))}

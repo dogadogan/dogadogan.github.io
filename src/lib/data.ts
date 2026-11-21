@@ -9,6 +9,7 @@ export const profile = load('profile');
 export const taxonomy = load('taxonomy');
 export const cv = load('cv');
 export const activities = load('activities');
+export const patents = load('patents').patents as any[];
 
 export type Project = CollectionEntry<'projects'>;
 

@@ -2,7 +2,7 @@
 // Printable CV generated from the same data as the website.
 // scripts/build-cv-pdf.mjs turns this page into /Mustafa-Doga-Dogan-CV.pdf after every build.
 import '@fontsource-variable/schibsted-grotesk';
-import { profile, cv, activities, getProjects, isMe, md, noImages, absolute } from '../lib/data';
+import { profile, cv, activities, patents, getProjects, isMe, md, noImages, absolute } from '../lib/data';
 
 const projects = await getProjects();
 const awards = projects.filter((p) => p.data.award);
@@ -99,7 +99,7 @@ const contactLinks = profile.links.filter((l: any) => ['Google Scholar', 'Linked
               {e.people && <> · {e.people.label}: {e.people.names.map((n: any) => n.name).join(', ')}</>}
             </p>
           </div>
-          <p class="when">{e.place}</p>
+          <p class="when">{e.dates}{e.dates && <br />}{e.place}</p>
         </div>
       ))}
 
@@ -125,6 +125,25 @@ const contactLinks = profile.links.filter((l: any) => ['Google Scholar', 'Linked
         })}
       </ol>
       {projects.some((p) => p.data.authorNote) && <p class="sub">* Equal contribution.</p>}
+
+      <h2>Patents</h2>
+      {['granted', 'pending'].map((status) => {
+        const list = patents.filter((x) => x.status === status);
+        return list.length > 0 && (
+          <>
+            <p class="group">{status === 'granted' ? 'Granted' : 'Pending (published applications)'}</p>
+            <ul class="plain">
+              {list.map((x) => (
+                <li>
+                  <span class="pub-authors">{x.inventors.map((a: string, i: number) => <>{isMe(a) ? <strong>{a}</strong> : a}{i < x.inventors.length - 1 ? ', ' : '. '}</>)}</span>
+                  <a class="pub-title" href={x.url}>{x.title}.</a>{' '}
+                  {x.number}, {status === 'granted' ? 'granted' : 'published'} {x.date}. {x.assignee}.
+                </li>
+              ))}
+            </ul>
+          </>
+        );
+      })}
 
       <h2>Teaching</h2>
       <ul class="plain">

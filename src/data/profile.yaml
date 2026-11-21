@@ -1,6 +1,7 @@
 # Basic profile. Used in the page header, the bio section, JSON-LD and llms.txt.
 name: Doğa Doğan
 fullName: Mustafa Doğa Doğan
+heroName: M. Doğa Doğan   # big name at the top of the home page
 asciiName: Mustafa Doga Dogan
 title: Research Scientist
 org: Adobe Research

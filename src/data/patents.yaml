@@ -1,0 +1,42 @@
+# Patents. Shown in the CV (src/pages/cv.astro). Most recent first within each group.
+# status: granted | pending
+patents:
+  - title: Generating virtual objects from embedded code
+    inventors: [Alexa Fay Siu, Tong Sun, Mustafa Doga Dogan, Jennifer Anne Healey, Curtis Michael Wigington]
+    number: US 12,430,813 B2
+    assignee: Adobe
+    status: granted
+    date: Sep 2025
+    url: https://patents.google.com/patent/US12430813B2/en
+
+  - title: Determining movement of passive physical interface controls
+    inventors: [Chang Xiao, Eunyee Koh, Daniel Campos Zamora, Alexa Fay Siu, Mustafa Doga Dogan]
+    number: US 2026/0340839 A1
+    assignee: Adobe
+    status: pending
+    date: Oct 2026
+    url: https://worldwide.espacenet.com/patent/search?q=pn%3DUS20260340839A1
+
+  - title: Content optimization using artificial intelligence agents
+    inventors: [Ronald Oribio, Niccolo Toccane, Mustafa Doga Dogan, Alina Rublea, Meryll Blanchet, Tobias Reiss, Aanisha Bhattacharyya, Yaman Kumar]
+    number: US 2026/0278245 A1
+    assignee: Adobe
+    status: pending
+    date: Sep 2026
+    url: https://worldwide.espacenet.com/patent/search?q=pn%3DUS20260278245A1
+
+  - title: Disentangling design elements for code component generation
+    inventors: [Paul-Bogdan Jurcut, Mustafa Doga Dogan, Lenard-Levente Palko, Christian Meyer, Adrian Kozma]
+    number: US 2026/0252788 A1
+    assignee: Adobe
+    status: pending
+    date: Aug 2026
+    url: https://worldwide.espacenet.com/patent/search?q=pn%3DUS20260252788A1
+
+  - title: Context menus for physical objects
+    inventors: [Mustafa Doga Dogan, Mar Gonzalez-Franco, David Kim]
+    number: WO 2025/184554 A1
+    assignee: Google
+    status: pending
+    date: Sep 2025
+    url: https://worldwide.espacenet.com/patent/search?q=pn%3DWO2025184554A1
