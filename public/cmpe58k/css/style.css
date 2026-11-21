@@ -64,8 +64,8 @@ body {
 }
 
 .week-header {
-    background: linear-gradient(135deg, var(--accent-color), #2980b9);
-    color: white;
+    background: #e3edf8;   /* pastel blue */
+    color: #23415f;
     padding: 1rem 1.5rem;
     font-weight: 600;
     font-size: 1.1rem;
@@ -83,24 +83,24 @@ body {
 }
 
 .assignment-item {
-    background: #e8f5e8;
-    border-left: 4px solid #27ae60;
+    border-radius: 6px;
+    background: #eef7ef;
     padding: 0.75rem;
     margin: 0.5rem 0;
     border-radius: 0 5px 5px 0;
 }
 
 .guest-item {
-    background: #fdeaea;
-    border-left: 4px solid #e74c3c;
+    border-radius: 6px;
+    background: #fcf0ef;
     padding: 0.75rem;
     margin: 0.5rem 0;
     border-radius: 0 5px 5px 0;
 }
 
 .reading-item {
-    background: #f0f8ff;
-    border-left: 4px solid #3498db;
+    border-radius: 6px;
+    background: #eef4fb;
     padding: 0.75rem;
     margin: 0.5rem 0;
     border-radius: 0 5px 5px 0;
@@ -140,8 +140,8 @@ body {
 }
 
 .badge-assignment {
-    background-color: #27ae60;
-    color: white;
+    background-color: #dcefdf;   /* pastel green */
+    color: #24603a;
     padding: 0.3rem 0.8rem;
     border-radius: 20px;
     font-size: 0.85rem;
@@ -149,8 +149,8 @@ body {
 }
 
 .badge-guest {
-    background-color: #e74c3c;
-    color: white;
+    background-color: #f8e1df;   /* pastel red */
+    color: #8a2f28;
     padding: 0.3rem 0.8rem;
     border-radius: 20px;
     font-size: 0.85rem;
@@ -158,8 +158,8 @@ body {
 }
 
 .badge-reading {
-    background-color: #3498db;
-    color: white;
+    background-color: #dde9f7;   /* pastel blue */
+    color: #23507e;
     padding: 0.3rem 0.8rem;
     border-radius: 20px;
     font-size: 0.85rem;
@@ -168,7 +168,6 @@ body {
 
 /* Guest speaker specific styles */
 .guest-speaker-card {
-    border-left: 4px solid #e74c3c;
     position: relative;
 }
 
@@ -196,5 +195,8 @@ body {
 }
 
 .project-card {
-    border-left: 4px solid #9b59b6;
 } 
+/* Phones and tablets: the hero icon cluster is decorative and overlaps the text below it. */
+@media (max-width: 991.98px) {
+    .hero-icon { display: none; }
+}
