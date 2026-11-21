@@ -206,7 +206,7 @@ a:hover .inline-logo, a:focus-visible .inline-logo { filter: none; }
 .vloop-physical { color: var(--physical); }
 .vloop-arrows { color: #cba36a; display: block; }
 .vloop-note { font-size: 0.82rem; line-height: 1.45; color: var(--ink-3); }
-.vloop-lr { display: inline-block; vertical-align: -0.1em; color: var(--ink-3); margin: 0 0.1em; }
+.vloop-lr { display: inline-block; vertical-align: -0.1em; color: #b8bec8; margin: 0 0.1em; }
 .has-selection .vcluster:not(.is-lit), .has-selection .vtheme-pill:not(.is-lit) { opacity: 0.4; }
 
 /* ---------- Work ---------- */
