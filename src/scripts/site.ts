@@ -33,8 +33,11 @@ document.querySelector('.pronounce-link')?.addEventListener('click', (e) => {
   if (!block) return;
   e.preventDefault();
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // land the note just below the sticky header (its scroll-margin-top adds the gap)
-  block.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+  // Scroll to the About section (its heading lands under the header, like the nav link),
+  // so the note is seen in context, then highlight the note.
+  const section = document.getElementById('about') ?? block;
+  const heading = section.querySelector('h2') ?? block;
+  section.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
   history.replaceState(null, '', '#pronounce');
   block.classList.remove('is-highlighted');
   const glow = () => {
@@ -51,12 +54,12 @@ document.querySelector('.pronounce-link')?.addEventListener('click', (e) => {
     if (done) return;
     // The layout can shift while the smooth scroll runs (e.g. with a filter active),
     // so check where the note really ended up and finish the scroll if it's off.
-    const r = block.getBoundingClientRect();
+    const r = heading.getBoundingClientRect();
     const header = document.querySelector('.topbar')?.getBoundingClientRect().bottom ?? 0;
     const atBottom = innerHeight + scrollY >= document.documentElement.scrollHeight - 2;
     if (!corrected && !atBottom && Math.abs(r.top - (header + 24)) > 40) {
       corrected = true;
-      block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
       last = -1;
       setTimeout(poll, 150);
       return;
