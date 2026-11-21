@@ -8,6 +8,8 @@ import xIcon from '../assets/icons/x.svg?raw';
 import githubIcon from '../assets/icons/github.svg?raw';
 
 // Footer shows only these profiles, each with its brand icon (Simple Icons, CC0).
+// Shorter text next to the icon in the footer.
+const footerLabel: Record<string, string> = { 'X / Twitter': 'Twitter' };
 const socialIcons: Record<string, string> = {
   'Google Scholar': scholarIcon,
   LinkedIn: linkedinIcon,
@@ -80,7 +82,7 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
         </div>
         <ul class="footer-links">
           {profile.links.filter((l: any) => socialIcons[l.label]).map((l: any) => (
-            <li><a href={l.url} rel="me noopener"><Fragment set:html={socialIcons[l.label]} />{l.label}</a></li>
+            <li><a href={l.url} rel="me noopener"><Fragment set:html={socialIcons[l.label]} />{footerLabel[l.label] ?? l.label}</a></li>
           ))}
         </ul>
       </div>
