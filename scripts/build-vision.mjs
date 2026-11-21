@@ -155,11 +155,10 @@ for (const id of ['v-panel_left', 'v-panel_right']) {
   center = center.slice(0, a) + center.slice(b);
 }
 center = center
-  .replace(/viewBox="[^"]+"/, 'viewBox="470 0 440 410"')
+  .replace(/viewBox="[^"]+"/, 'viewBox="476 24 406 370"')
   .replace(/<title id="vision-title">[\s\S]*?<\/title><desc id="vision-desc">[\s\S]*?<\/desc>/, '')
   .replace(/role="group" aria-labelledby="vision-title vision-desc"/, 'role="img" aria-label="A reinforcing loop between digital and physical contexts: better understanding and better experiences, anywhere"')
-  .replace('class="vision-svg"', 'class="vision-center-svg"')
-  .replace(/ class="v-hit v-theme-art" data-theme="[^"]+"/g, '');
+  .replace('class="vision-svg"', 'class="vision-center-svg"');  // digital/physical art stays clickable (v-theme-art)
 writeFileSync(new URL('src/generated/vision-center.svg', root), center);
 
 // 2. Cluster icons (the line icons in the 40x40 tiles), recolored to currentColor.

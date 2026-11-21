@@ -38,7 +38,7 @@ function initFilters() {
   const entries = [...document.querySelectorAll<HTMLElement>('.entry')];
   const years = [...document.querySelectorAll<HTMLElement>('.year')];
   const chips = [...document.querySelectorAll<HTMLButtonElement>('.chip[data-filter-topic]')];
-  const svgHits = [...document.querySelectorAll<HTMLElement>('.v-cluster, .v-theme')];
+  const svgHits = [...document.querySelectorAll<HTMLElement>('.v-cluster, .v-theme, .v-theme-art')];
   const visionRoot = document.querySelector<HTMLElement>('[data-vision-root]');
   const pill = document.querySelector<HTMLElement>('.vision-pill')!;
   const pillLabel = document.querySelector<HTMLElement>('.vision-pill-label')!;
@@ -95,6 +95,10 @@ function initFilters() {
       if (!active && state.topic && !isCluster) lit = clustersOfTheme(id).some((v) => entries.some((el) => matches(el, { topic: state.topic, vision: v, theme: '' })));
       g.classList.toggle('is-lit', lit);
     }
+    // HTML panels: a panel stays lit if its heading or any of its clusters is lit.
+    document.querySelectorAll('.vp-panel').forEach((p) => {
+      p.classList.toggle('is-lit', Boolean(p.querySelector('.v-theme.is-lit, .v-cluster.is-lit')));
+    });
     document.querySelectorAll('.v-panel').forEach((p) => {
       const th = (p as HTMLElement).dataset.panelTheme!;
       p.classList.toggle('is-lit', state.theme === th || (state.vision !== '' && themeOfCluster(state.vision) === th));

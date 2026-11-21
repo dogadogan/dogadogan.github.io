@@ -170,7 +170,7 @@ a:hover .inline-logo, a:focus-visible .inline-logo { filter: none; }
 .has-selection .v-panel:not(.is-lit) > rect:first-child { opacity: 0.5; }
 
 /* ---------- Vision: HTML panels (visionStyle: html) ---------- */
-.vp { display: grid; grid-template-columns: minmax(0, 1fr) minmax(200px, 0.72fr) minmax(0, 1fr); gap: clamp(1rem, 2.5vw, 2rem); align-items: start; }
+.vp { display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, 0.85fr) minmax(0, 1fr); gap: clamp(1rem, 2.5vw, 2rem); align-items: start; }
 .vp-digital { --accent: #5b6472; --tint: #eef1f5; }
 .vp-physical { --accent: #96632f; --tint: #f6efe5; }
 .vp-panel { border-top: 2px solid var(--accent); padding-top: 0.9rem; }
@@ -209,8 +209,23 @@ a:hover .inline-logo, a:focus-visible .inline-logo { filter: none; }
 .vp-center { align-self: center; text-align: center; }
 .vp-center-art svg { display: block; width: 100%; height: auto; }
 .vision-center-svg .v-st25 { fill: transparent; }
+.vision-center-svg .v-theme-art { cursor: pointer; transition: opacity 0.25s ease, filter 0.2s ease; }
+.vision-center-svg .v-theme-art:hover { filter: brightness(1.06) saturate(1.2); }
+.has-selection .vision-center-svg .v-theme-art:not(.is-lit) { opacity: 0.35; }
 .vp .vloop { display: none; }
 .has-selection .vp-head:not(.is-lit) { opacity: 0.4; }
+.vp-intro { transition: opacity 0.25s; }
+.has-selection .vp-panel:not(.is-lit) .vp-intro { opacity: 0.4; }
+/* Narrower desktops and tablets: smaller panel text, more room for the center loop. */
+@media (min-width: 901px) and (max-width: 1280px) {
+  .vp { grid-template-columns: minmax(0, 1fr) minmax(260px, 1fr) minmax(0, 1fr); gap: 1rem; }
+  .vp-head { font-size: 0.95rem; }
+  .vp-intro { font-size: 0.8rem; }
+  .vp-item { grid-template-columns: 22px 1fr; gap: 0.6rem; padding-block: 0.65rem; }
+  .vp-icon svg { width: 22px; height: 22px; }
+  .vp-title { font-size: 0.86rem; }
+  .vp-desc, .vp-meta, .vp-award { font-size: 0.77rem; }
+}
 @media (max-width: 900px) {
   .vp { grid-template-columns: 1fr; gap: 1.25rem; max-width: 560px; margin-inline: auto; }
   .vp-center-art { display: none; }
