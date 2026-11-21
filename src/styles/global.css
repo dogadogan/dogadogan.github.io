@@ -122,7 +122,7 @@ html.js .topbar.show-name ~ main .hero-name { opacity: 0.25; }
 }
 .hero-name:hover .pronounce-link, .pronounce-link:focus-visible { opacity: 1; transform: none; }
 .pronounce-link:hover { color: var(--ink); }
-@media (hover: none) { .pronounce-link { opacity: 0.6; transform: none; } }  /* touch screens: always visible */
+@media (hover: none), (max-width: 640px) { .pronounce-link { display: none; } }  /* phones/touch: no hover, so hide it */
 #pronounce { scroll-margin-top: 1.5rem; }
 .pronounce-q { font-size: 0.95rem; font-weight: 700; line-height: 1; letter-spacing: 0; }
 .pronounce-link svg { align-self: baseline; }
