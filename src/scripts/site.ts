@@ -2,8 +2,11 @@
 // This file adds (1) click-to-play YouTube and (2) filtering by topic / vision cluster,
 // kept in sync with the vision diagram and the URL (?topic=…&vision=…|theme=…).
 
-/** Run `cb` once the page has stopped scrolling ('scrollend' where supported, else polling). */
-function afterScroll(cb: () => void, maxMs = 3000) {
+/**
+ * Run `cb` once the page has stopped scrolling ('scrollend' where supported, else polling).
+ * With `early`, fire as soon as the scroll is clearly slowing down near its target.
+ */
+function afterScroll(cb: () => void, maxMs = 3000, early?: () => boolean) {
   let done = false;
   const listeners = new AbortController();
   const fire = () => { if (done) return; done = true; listeners.abort(); cb(); };
@@ -11,11 +14,12 @@ function afterScroll(cb: () => void, maxMs = 3000) {
   let last = scrollY;
   const poll = () => {
     if (done) return;
-    if (Math.abs(scrollY - last) < 1) return fire();
+    const step = Math.abs(scrollY - last);
+    if (step < 1 || (early && step < 40 && early())) return fire();
     last = scrollY;
-    setTimeout(poll, 120);
+    setTimeout(poll, 80);
   };
-  setTimeout(poll, 160);
+  setTimeout(poll, 120);
   setTimeout(fire, maxMs);
 }
 
@@ -198,6 +202,12 @@ function initFilters() {
   function announcePill() {
     if (pill.hidden) return;
     pill.classList.remove('is-announced');
+    // start as the scroll eases into place, once the pill is on screen below the header
+    const pillInView = () => {
+      const r = pill.getBoundingClientRect();
+      const header = document.querySelector('.topbar')?.getBoundingClientRect().bottom ?? 0;
+      return r.top >= header && r.bottom <= innerHeight;
+    };
     afterScroll(() => {
       if (pill.hidden) return;
       void pill.offsetWidth; // restart the animation if it's still running
@@ -205,7 +215,7 @@ function initFilters() {
       pill.addEventListener('animationend', (e) => {
         if ((e as AnimationEvent).animationName === 'pill-fade') pill.classList.remove('is-announced');
       });
-    });
+    }, 3000, pillInView);
   }
 
   function revealList() {

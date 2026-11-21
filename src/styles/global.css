@@ -350,7 +350,7 @@ a:hover .inline-logo, a:focus-visible .inline-logo { filter: none; }
 .chip-n { font-size: 0.7rem; opacity: 0.6; margin-left: 0.1rem; }
 .filter-status { display: flex; align-items: center; gap: 0.75rem; }
 .vision-pill {
-  position: relative;
+  position: relative; isolation: isolate;
   display: inline-flex; align-items: center; gap: 0.35rem;
   background: linear-gradient(90deg, var(--digital-tint), var(--physical-tint));
   border-radius: 999px; padding: 0.25rem 0.35rem 0.25rem 0.75rem; font-size: 0.85rem; font-weight: 600;
@@ -375,8 +375,16 @@ a:hover .inline-logo, a:focus-visible .inline-logo { filter: none; }
 .vision-pill.is-announced::after {
   animation: pill-trace 2.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards, pill-fade 2.6s linear forwards;
 }
+/* Background pulse: brightens and dims twice while the spark runs. */
+.vision-pill::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; z-index: -1;
+  background: linear-gradient(90deg, #fff4cf, #ffe7a6);
+  opacity: 0; pointer-events: none;
+}
+.vision-pill.is-announced::before { animation: pill-pulse 2.6s ease-in-out forwards; }
+@keyframes pill-pulse { 0% { opacity: 0; } 22% { opacity: 1; } 45% { opacity: 0.15; } 70% { opacity: 1; } 100% { opacity: 0; } }
 @keyframes pill-trace { from { --pill-angle: 0deg; } to { --pill-angle: 360deg; } }
-@keyframes pill-fade { 0% { opacity: 0; } 12% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes pill-fade { 0% { opacity: 0.5; } 8% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
   .vision-pill.is-announced::after { background: #ffd75e; animation: pill-fade 2.6s linear forwards !important; }
 }
