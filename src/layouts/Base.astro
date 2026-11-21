@@ -67,7 +67,7 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
           <p class="footer-name">{profile.fullName}. {new Date().getFullYear()}.</p>
         </div>
         <ul class="footer-links">
-          {profile.links.filter((l: any) => l.label !== 'PhD thesis').map((l: any) => <li><a href={l.url} rel="me noopener">{l.label}</a></li>)}
+          {profile.links.filter((l: any) => !['PhD thesis', 'Adobe profile', 'MIT profile'].includes(l.label)).map((l: any) => <li><a href={l.url} rel="me noopener">{l.label}</a></li>)}
         </ul>
       </div>
     </footer>

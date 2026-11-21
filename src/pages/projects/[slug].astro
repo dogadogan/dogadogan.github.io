@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Media from '../../components/Media.astro';
 import { render } from 'astro:content';
-import { getProjects, linkLabel, profile, topicById, clusterById, isMe, summaryOf, projectImage, absolute, type Project } from '../../lib/data';
+import { getProjects, linkLabel, linkIcon, profile, topicById, clusterById, isMe, summaryOf, projectImage, absolute, type Project } from '../../lib/data';
 
 export async function getStaticPaths() {
   const projects = await getProjects();
@@ -67,7 +67,7 @@ const jsonLd = {
     <Media youtube={d.youtube} image={d.image} title={d.short} size="large" eager />
     {d.links.length > 0 && (
       <ul class="entry-links detail-links">
-        {d.links.map((l) => <li><a href={l.url}>{linkLabel(l.label)}</a></li>)}
+        {d.links.map((l) => <li><a href={l.url}><Fragment set:html={linkIcon(l.label)} />{linkLabel(l.label)}</a></li>)}
       </ul>
     )}
     <h2 class="section-label mono">Abstract</h2>

@@ -1,7 +1,7 @@
 ---
 import Media from './Media.astro';
 import { render } from 'astro:content';
-import { topicById, clusterById, isMe, linkLabel, type Project } from '../lib/data';
+import { topicById, clusterById, isMe, linkLabel, linkIcon, type Project } from '../lib/data';
 
 interface Props {
   project: Project;
@@ -47,7 +47,7 @@ const sortedLinks = [...d.links].sort((a, b) => (/^paper|^pdf/i.test(b.label) ? 
     {d.links.length > 0 && (
       <ul class="entry-links">
         {sortedLinks.map((l) => (
-          <li><a href={l.url}>{linkLabel(l.label)}</a></li>
+          <li><a href={l.url}><Fragment set:html={linkIcon(l.label)} />{linkLabel(l.label)}</a></li>
         ))}
       </ul>
     )}

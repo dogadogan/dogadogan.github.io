@@ -71,6 +71,34 @@ export function linkLabel(l: string): string {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
+const ICONS: Record<string, string> = {
+  paper: '<path d="M4 1.5h5.5L13 5v9.5H4z"/><path d="M9.5 1.5V5H13M6.5 8h4M6.5 10.5h4"/>',
+  web: '<circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4M8 1.8c1.8 1.8 2.6 3.9 2.6 6.2S9.8 12.4 8 14.2C6.2 12.4 5.4 10.3 5.4 8S6.2 3.6 8 1.8"/>',
+  video: '<rect x="1.8" y="3.3" width="12.4" height="9.4" rx="1.6"/><path d="M6.6 6v4l3.4-2z"/>',
+  talk: '<rect x="2" y="2.5" width="12" height="8" rx="1"/><path d="M8 10.5V14M5.5 14h5M5 5.5h6M5 7.8h3.5"/>',
+  code: '<path d="M5.5 4.5 2 8l3.5 3.5M10.5 4.5 14 8l-3.5 3.5"/>',
+  doi: '<path d="M6.8 9.2a2.6 2.6 0 0 0 3.7 0l2.2-2.2a2.6 2.6 0 0 0-3.7-3.7l-.8.8M9.2 6.8a2.6 2.6 0 0 0-3.7 0L3.3 9a2.6 2.6 0 0 0 3.7 3.7l.8-.8"/>',
+  demo: '<path d="M8 2v2.2M8 11.8V14M2 8h2.2M11.8 8H14M3.8 3.8l1.5 1.5M10.7 10.7l1.5 1.5M3.8 12.2l1.5-1.5M10.7 5.3l1.5-1.5"/>',
+  poster: '<rect x="2.5" y="1.8" width="11" height="12.4" rx="1"/><path d="m2.5 11 3.2-3.2 2.6 2.6 1.7-1.7 3.5 3.5"/><circle cx="10.3" cy="5.2" r="1.1"/>',
+  data: '<ellipse cx="8" cy="3.8" rx="5.2" ry="2"/><path d="M2.8 3.8v8.4c0 1.1 2.3 2 5.2 2s5.2-.9 5.2-2V3.8M2.8 8c0 1.1 2.3 2 5.2 2s5.2-.9 5.2-2"/>',
+};
+
+/** Small grayscale icon for a project link, chosen from its label. */
+export function linkIcon(label: string): string {
+  const l = label.toLowerCase();
+  const key =
+    /video/.test(l) ? 'video'
+    : /talk/.test(l) ? 'talk'
+    : /code|github|open-source|kaggle/.test(l) ? 'code'
+    : /^doi$/.test(l) ? 'doi'
+    : /demo/.test(l) ? 'demo'
+    : /^poster$/.test(l) ? 'poster'
+    : /data/.test(l) ? 'data'
+    : /paper|pdf|poster|journal/.test(l) ? 'paper'
+    : 'web';
+  return `<svg class="link-icon" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[key]}</svg>`;
+}
+
 /** Remove Markdown images (inline logos) but keep links. */
 export const noImages = (s: string = '') => s.replace(/!\[[^\]]*\]\([^)]+\)/g, '');
 

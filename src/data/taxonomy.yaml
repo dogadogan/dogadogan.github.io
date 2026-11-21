@@ -1,3 +1,8 @@
+# How the research vision is drawn on the home page:
+#   html = calm HTML panels built from `themes` below (default)
+#   svg  = the original Illustrator diagram (design/vision.svg), kept as a backup
+visionStyle: html
+
 # Topics: the filter chips above the project list. A project can have several.
 # `axis` places the topic on the digital <-> physical spectrum (informational).
 topics:

@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import ProjectEntry from '../components/ProjectEntry.astro';
 import VisionCards from '../components/VisionCards.astro';
+import VisionPanels from '../components/VisionPanels.astro';
 import visionSvg from '../generated/vision.svg?raw';
 import { profile, taxonomy, cv, activities, getProjects, md, plain, absolute, summaryOf, projectImage } from '../lib/data';
 
@@ -77,10 +78,16 @@ const list = {
       <p class="vision-hint"><span class="js-only">click a theme to filter publications</span></p>
     </div>
     <div class="vision-root" data-vision-root>
-      <div class="vision-frame">
-        <Fragment set:html={visionSvg} />
-      </div>
-      <VisionCards />
+      {taxonomy.visionStyle === 'svg' ? (
+        <>
+          <div class="vision-frame">
+            <Fragment set:html={visionSvg} />
+          </div>
+          <VisionCards />
+        </>
+      ) : (
+        <VisionPanels />
+      )}
     </div>
   </section>
 

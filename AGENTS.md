@@ -12,7 +12,7 @@ This is a static Astro site. Content lives in plain files; do not hard-code cont
   - The Markdown body is the abstract.
 - **Update bio, links, CV, service, talks:** edit the YAML files in `src/data/`.
 - **Add a new topic:** add it to `taxonomy.yaml` → `topics`; the filter chip appears automatically.
-- **If a project name appears in the vision diagram,** map it in `taxonomy.yaml` → `svgLinks`, and update the phone version text (`themes[].clusters[].items`).
+- **Research vision:** the home page draws it as HTML panels from `taxonomy.yaml` → `themes` (`visionStyle: html`). The original Illustrator diagram is kept as a backup (`visionStyle: svg`). To list a project in a cluster, add it to `themes[].clusters[].items` and map its name in `svgLinks`.
 
 ## Rules
 

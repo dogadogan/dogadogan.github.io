@@ -71,7 +71,9 @@ for (const theme of taxonomy.themes) {
   const clusters = [];
   const openRe = /<g id="v-[^"]+" class="v-hit v-cluster"[^>]*>\s*<rect[^>]*?x="([\d.]+)" y="([\d.]+)" width="([\d.]+)" height="([\d.]+)"/g;
   for (let m; (m = openRe.exec(svg)); ) {
-    clusters.push({ index: m.index, tagEnd: svg.indexOf('>', m.index) + 1, x: +m[1], y: +m[2], w: +m[3], h: +m[4] });
+    // insert moved icons right after the card's background rect, so the background doesn't cover them
+    const tagEnd = svg.indexOf('>', m.index) + 1;
+    clusters.push({ index: m.index, tagEnd: svg.indexOf('/>', tagEnd) + 2, x: +m[1], y: +m[2], w: +m[3], h: +m[4] });
   }
   const iconRe = /<g>\s*(?:<(?:path|circle|rect)[^>]*\/>\s*)+<\/g>/g;
   const firstPoint = (block) => {
@@ -129,4 +131,54 @@ svg = svg.replace(
 
 mkdirSync(new URL('src/generated/', root), { recursive: true });
 writeFileSync(new URL('src/generated/vision.svg', root), svg);
+
+// ---------- Pieces for the HTML version of the diagram ----------
+/** Index range [start, end) of the balanced <g ...>...</g> element that starts at `start`. */
+function groupRange(text, start) {
+  const re = /<g\b[^>]*?(\/?)>|<\/g>/g;
+  re.lastIndex = start;
+  let depth = 0;
+  for (let m; (m = re.exec(text)); ) {
+    if (m[0].startsWith('</')) depth--;
+    else if (!m[1]) depth++;
+    if (depth === 0) return [start, re.lastIndex];
+  }
+  throw new Error('unbalanced <g>');
+}
+
+// 1. Center loop only (panels removed, viewBox cropped to the middle).
+let center = svg;
+for (const id of ['v-panel_left', 'v-panel_right']) {
+  const i = center.indexOf(`<g id="${id}"`);
+  if (i < 0) continue;
+  const [a, b] = groupRange(center, i);
+  center = center.slice(0, a) + center.slice(b);
+}
+center = center
+  .replace(/viewBox="[^"]+"/, 'viewBox="470 0 440 410"')
+  .replace(/<title id="vision-title">[\s\S]*?<\/title><desc id="vision-desc">[\s\S]*?<\/desc>/, '')
+  .replace(/role="group" aria-labelledby="vision-title vision-desc"/, 'role="img" aria-label="A reinforcing loop between digital and physical contexts: better understanding and better experiences, anywhere"')
+  .replace('class="vision-svg"', 'class="vision-center-svg"')
+  .replace(/ class="v-hit v-theme-art" data-theme="[^"]+"/g, '');
+writeFileSync(new URL('src/generated/vision-center.svg', root), center);
+
+// 2. Cluster icons (the line icons in the 40x40 tiles), recolored to currentColor.
+const icons = {};
+for (const theme of taxonomy.themes) {
+  for (const c of theme.clusters) {
+    const i = svg.indexOf(`<g id="v-${c.svgGroup}"`);
+    const [a, b] = groupRange(svg, i);
+    const block = svg.slice(a, b);
+    const tile = block.match(/<rect class="v-st4[24]" x="([\d.]+)" y="([\d.]+)" width="40" height="40"\/>\s*(<g>[\s\S]*?<\/g>)/);
+    if (!tile) { console.warn(`[vision] no icon found for ${c.id}`); continue; }
+    const shapes = tile[3]
+      .replace(/^<g>|<\/g>$/g, '')
+      .replace(/\s*class="[^"]*"/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+    icons[c.id] = `<svg viewBox="${tile[1]} ${tile[2]} 40 40" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${shapes}</svg>`;
+  }
+}
+writeFileSync(new URL('src/generated/vision-icons.json', root), JSON.stringify(icons, null, 2));
+console.log(`[vision] wrote center loop (${(center.length / 1024).toFixed(0)} KB) and ${Object.keys(icons).length} cluster icons`);
 console.log(`[vision] ${(src.length / 1024).toFixed(0)} KB -> ${(svg.length / 1024).toFixed(0)} KB inline, ${images.length} image(s) extracted, ${linked} names linked`);

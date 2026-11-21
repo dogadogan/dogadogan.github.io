@@ -34,7 +34,8 @@ npm run build      # production build into dist/, including the CV PDF
 - **Small, optional JavaScript** (~2 KB gzipped) adds two things: filtering, and click-to-play YouTube. Without JS, the page still shows everything.
 - **YouTube loads only on click.** Cards show a thumbnail; the player (`youtube-nocookie.com`) is created when someone presses play.
 - **Machine-readable extras**, generated from the same data: JSON-LD (`Person`, `ScholarlyArticle`), Google Scholar `citation_*` meta tags on each project page, `/llms.txt`, `/llms-full.txt`, `/publications.json`, and `/sitemap-index.xml`.
-- **Vision diagram:** `scripts/build-vision.mjs` runs before every build. It extracts the embedded raster image, namespaces the SVG's classes, makes the clusters clickable, and links project names. On screens narrower than 900 px, an HTML version built from `taxonomy.yaml` replaces the SVG, which is too small to read on phones.
+- **Vision diagram:** by default (`visionStyle: html` in `taxonomy.yaml`) the side panels are HTML built from `taxonomy.yaml`, with the center loop and cluster icons taken from `design/vision.svg`. Set `visionStyle: svg` to show the original Illustrator diagram instead.
+- **Diagram build step:** `scripts/build-vision.mjs` runs before every build. It extracts the embedded raster image, namespaces the SVG's classes, makes the clusters clickable, and links project names. On screens narrower than 900 px, an HTML version built from `taxonomy.yaml` replaces the SVG, which is too small to read on phones.
 - **CV PDF:** `/cv/` is a print-styled page built from the same YAML and project files. After `astro build`, `scripts/build-cv-pdf.mjs` opens it in headless Chromium and saves `dist/Mustafa-Doga-Dogan-CV.pdf`, linked as **CV** on the home page. The PDF is regenerated on every deploy, so it never drifts from the website. (In `npm run dev`, the CV link opens the HTML version instead.)
 - **Self-hosted paper PDFs** live in `public/papers/`.
 
