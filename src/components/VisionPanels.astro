@@ -28,6 +28,9 @@ const ribbon = '<svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="tru
           {th.clusters.map((c: any) => (
             <li>
               <div class="vp-item v-cluster" data-vision={c.id} data-theme={th.id} role="button" tabindex="0" aria-pressed="false" aria-label={`Show publications on ${c.label}`}>
+                <button type="button" class="vp-clear" aria-label={`Clear the ${c.label} filter`} tabindex="-1">
+                  <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>
+                </button>
                 {iconMap[c.id] && <span class="vp-icon" set:html={iconMap[c.id]} />}
                 <div class="vp-text">
                   <p class="vp-title">{c.label}</p>

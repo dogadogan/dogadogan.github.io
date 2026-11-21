@@ -190,7 +190,7 @@ a:hover .inline-logo, a:focus-visible .inline-logo { filter: none; }
 .vision-svg .v-cluster[data-theme='physical-metadata']:focus-visible > rect:first-child { stroke: var(--physical); }
 .vision-svg .v-cluster[aria-pressed='true'] > rect:first-child { stroke: var(--digital); stroke-width: 2px; }
 .vision-svg .v-cluster[data-theme='physical-metadata'][aria-pressed='true'] > rect:first-child { stroke: var(--physical); }
-.vision-svg .v-theme:hover, .vision-svg .v-theme-art:hover { filter: brightness(1.08); }
+.vision-svg .v-theme:hover, .vision-svg .v-theme-art:hover { filter: url(#vfx-hover); }  /* SVG filter: works in Safari too */
 .vision-svg g:focus, .vision-svg g:focus-visible { outline: none; }  /* focus is shown by the card's own border instead */
 .vision-svg .v-theme:focus-visible > path:first-child { stroke: var(--focus); stroke-width: 2px; }
 .vision-svg .v-link { cursor: pointer; }
@@ -223,6 +223,16 @@ a:hover .inline-logo, a:focus-visible .inline-logo { filter: none; }
   transition: background 0.2s, opacity 0.25s;
 }
 .vp-item:hover { background: var(--tint); }
+.vp-item { position: relative; }
+/* × on a selected card: shown on hover (always on touch screens); clears the filter */
+.vp-clear {
+  all: unset; box-sizing: border-box; position: absolute; top: 0.45rem; right: 0.45rem;
+  width: 22px; height: 22px; border-radius: 50%; display: none; place-items: center; cursor: pointer;
+  background: var(--surface); color: var(--ink-2); box-shadow: 0 0 0 1px var(--rule), 0 1px 3px rgba(20, 24, 32, 0.08);
+}
+.vp-clear:hover { color: var(--ink); box-shadow: 0 0 0 1px var(--ink-3), 0 1px 3px rgba(20, 24, 32, 0.12); }
+.vp-item[aria-pressed='true']:hover .vp-clear { display: grid; }
+@media (hover: none) { .vp-item[aria-pressed='true'] .vp-clear { display: grid; } }
 .vp-item[aria-pressed='true'] { background: var(--tint); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent); }
 .vp-item:focus { outline: none; }
 .vp-item:focus-visible { box-shadow: inset 0 0 0 2px var(--focus); }
@@ -242,9 +252,9 @@ a:hover .inline-logo, a:focus-visible .inline-logo { filter: none; }
 .vp-center-art svg { display: block; width: 100%; height: auto; }
 .vision-center-svg .v-st25 { fill: transparent; }
 .vision-center-svg .v-theme-art { cursor: pointer; transition: opacity 0.25s ease, filter 0.2s ease; }
-.vision-center-svg .v-theme-art:hover { filter: brightness(1.06) saturate(1.2); }
+.vision-center-svg .v-theme-art:hover { filter: url(#vfx-hover); }  /* SVG filter (in the drawing's <defs>): works in Safari too */
 /* Wash out instead of fading: the art must stay opaque, or the connector behind it shows through. */
-.has-selection .vision-center-svg .v-theme-art:not(.is-lit) { filter: grayscale(1) contrast(0.4) brightness(1.3); }
+.has-selection .vision-center-svg .v-theme-art:not(.is-lit) { filter: url(#vfx-wash); }
 .vp .vloop { display: none; }
 .has-selection .vp-head:not(.is-lit) { opacity: 0.4; }
 .vp-intro { transition: opacity 0.25s; }

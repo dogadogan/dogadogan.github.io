@@ -36,6 +36,15 @@ try {
   svg = svg.replace(/(\/images\/vision\/vision-\d+)\.webp/g, '$1.png');
 }
 
+// 1b. SVG filters for hover/dim effects. Safari ignores CSS filter functions (brightness(),
+// grayscale(), ...) on SVG elements, but supports filter: url(#id) pointing at these.
+svg = svg.replace(
+  '<defs>',
+  `<defs>
+    <filter id="vfx-hover" color-interpolation-filters="sRGB"><feColorMatrix type="saturate" values="1.25"/><feComponentTransfer><feFuncR type="linear" slope="1.07"/><feFuncG type="linear" slope="1.07"/><feFuncB type="linear" slope="1.07"/></feComponentTransfer></filter>
+    <filter id="vfx-wash" color-interpolation-filters="sRGB"><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncR type="linear" slope="0.52" intercept="0.39"/><feFuncG type="linear" slope="0.52" intercept="0.39"/><feFuncB type="linear" slope="0.52" intercept="0.39"/></feComponentTransfer></filter>`,
+);
+
 // 2. Namespace classes and ids
 svg = svg
   .replace(/\.st(\d+)/g, '.v-st$1')

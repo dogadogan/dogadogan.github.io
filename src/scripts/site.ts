@@ -274,6 +274,12 @@ function initFilters() {
   if (visionRoot) {
     visionRoot.addEventListener('click', (e) => {
       const t = e.target as Element;
+      if (t.closest('.vp-clear')) {
+        e.stopPropagation();
+        state.vision = state.theme = '';
+        apply();
+        return;
+      }
       const link = t.closest<HTMLElement>('a.v-link[data-project]');
       if (link) {
         // Make sure the linked project is visible before jumping to it.
