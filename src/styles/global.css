@@ -211,7 +211,8 @@ a:hover .inline-logo, a:focus-visible .inline-logo { filter: none; }
 .vision-center-svg .v-st25 { fill: transparent; }
 .vision-center-svg .v-theme-art { cursor: pointer; transition: opacity 0.25s ease, filter 0.2s ease; }
 .vision-center-svg .v-theme-art:hover { filter: brightness(1.06) saturate(1.2); }
-.has-selection .vision-center-svg .v-theme-art:not(.is-lit) { opacity: 0.35; }
+/* Wash out instead of fading: the art must stay opaque, or the connector behind it shows through. */
+.has-selection .vision-center-svg .v-theme-art:not(.is-lit) { filter: grayscale(1) contrast(0.4) brightness(1.3); }
 .vp .vloop { display: none; }
 .has-selection .vp-head:not(.is-lit) { opacity: 0.4; }
 .vp-intro { transition: opacity 0.25s; }

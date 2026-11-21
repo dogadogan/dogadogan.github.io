@@ -50,8 +50,12 @@ function initFilters() {
     document.documentElement.style.setProperty('--filters-h', `${Math.ceil(e.borderBoxSize[0].blockSize)}px`);
   }).observe(filtersBar);
 
-  const labelFor = (attr: 'vision' | 'theme', id: string) =>
-    document.querySelector(`[data-${attr}="${id}"][aria-label]`)?.getAttribute('aria-label')?.replace(/^Show projects on /, '') ?? id;
+  // Human-readable name of a cluster or theme, for the active-filter pill.
+  const labelFor = (attr: 'vision' | 'theme', id: string) => {
+    const el = document.querySelector(attr === 'vision' ? `.v-cluster[data-vision="${id}"]` : `.v-theme[data-theme="${id}"]`);
+    const aria = el?.getAttribute('aria-label')?.replace(/^Show (projects|publications) on /, '');
+    return aria || el?.textContent?.trim() || id;
+  };
   const themeOfCluster = (id: string) => document.querySelector(`.v-cluster[data-vision="${id}"]`)?.getAttribute('data-theme') ?? '';
   const clustersOfTheme = (id: string) =>
     [...document.querySelectorAll(`.v-cluster[data-theme="${id}"]`)].map((g) => g.getAttribute('data-vision')!);
