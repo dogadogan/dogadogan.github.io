@@ -115,8 +115,8 @@ html.js .topbar.show-name ~ main .hero-name { opacity: 0.25; }
   text-wrap: balance;
 }
 .pronounce-link {
-  position: relative; text-decoration: none; align-items: center; gap: 0.05em;
-  display: inline-flex; vertical-align: middle; margin-left: 0.35em; padding: 0.15em;
+  position: relative; text-decoration: none; align-items: baseline; gap: 0.05em;
+  display: inline-flex; vertical-align: baseline; margin-left: 0.35em; padding: 0 0.15em;
   color: var(--ink-3); border-radius: 6px; opacity: 0; transform: translateX(-4px);
   transition: opacity 0.2s ease, transform 0.2s ease, color 0.15s;
 }
@@ -124,7 +124,8 @@ html.js .topbar.show-name ~ main .hero-name { opacity: 0.25; }
 .pronounce-link:hover { color: var(--ink); }
 @media (hover: none) { .pronounce-link { opacity: 0.6; transform: none; } }  /* touch screens: always visible */
 #pronounce { scroll-margin-top: 1.5rem; }
-.pronounce-q { font-size: 0.95rem; font-weight: 700; line-height: 1; letter-spacing: 0; align-self: flex-start; margin-top: 0.05em; }
+.pronounce-q { font-size: 0.95rem; font-weight: 700; line-height: 1; letter-spacing: 0; }
+.pronounce-link svg { align-self: baseline; }
 /* Tooltip: appears after a short hover (or on keyboard focus). */
 .pronounce-tip {
   position: absolute; left: 50%; top: calc(100% + 8px); z-index: 30;
