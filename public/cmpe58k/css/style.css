@@ -200,3 +200,7 @@ body {
 @media (max-width: 991.98px) {
     .hero-icon { display: none; }
 }
+
+/* Hero badges: even spacing when they wrap onto a second line */
+.hero-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.hero-badges .badge { margin: 0 !important; }
