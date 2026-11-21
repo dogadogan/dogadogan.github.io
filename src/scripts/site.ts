@@ -2,6 +2,23 @@
 // This file adds (1) click-to-play YouTube and (2) filtering by topic / vision cluster,
 // kept in sync with the vision diagram and the URL (?topic=…&vision=…|theme=…).
 
+/** Run `cb` once the page has stopped scrolling ('scrollend' where supported, else polling). */
+function afterScroll(cb: () => void, maxMs = 3000) {
+  let done = false;
+  const listeners = new AbortController();
+  const fire = () => { if (done) return; done = true; listeners.abort(); cb(); };
+  window.addEventListener('scrollend', fire, { signal: listeners.signal });
+  let last = scrollY;
+  const poll = () => {
+    if (done) return;
+    if (Math.abs(scrollY - last) < 1) return fire();
+    last = scrollY;
+    setTimeout(poll, 120);
+  };
+  setTimeout(poll, 160);
+  setTimeout(fire, maxMs);
+}
+
 // ---------- 1. Click-to-play YouTube ----------
 document.addEventListener('click', (e) => {
   const a = (e.target as Element).closest<HTMLAnchorElement>('a.yt');
@@ -164,6 +181,7 @@ function initFilters() {
 
     pill.hidden = !active;
     if (active) pillLabel.textContent = state.vision ? labelFor('vision', state.vision) : labelFor('theme', state.theme);
+    pill.dataset.theme = state.vision ? themeOfCluster(state.vision) : state.theme;
 
     if (push) {
       const url = new URL(location.href);
@@ -173,6 +191,21 @@ function initFilters() {
       }
       history.replaceState(null, '', url);
     }
+  }
+
+  // After a vision click (and any scroll it caused), trace the filter pill's border once
+  // so it's obvious which filter was applied.
+  function announcePill() {
+    if (pill.hidden) return;
+    pill.classList.remove('is-announced');
+    afterScroll(() => {
+      if (pill.hidden) return;
+      void pill.offsetWidth; // restart the animation if it's still running
+      pill.classList.add('is-announced');
+      pill.addEventListener('animationend', (e) => {
+        if ((e as AnimationEvent).animationName === 'pill-fade') pill.classList.remove('is-announced');
+      });
+    });
   }
 
   function revealList() {
@@ -212,6 +245,7 @@ function initFilters() {
     if (visBtn) {
       selectVision(visBtn.dataset.filterVision!);
       revealList();
+      announcePill();
       return;
     }
     if (t.closest('.vision-clear')) {
@@ -247,12 +281,14 @@ function initFilters() {
       if (cluster) {
         selectVision(cluster.dataset.vision!);
         revealList();
+        announcePill();
         return;
       }
       const theme = t.closest<HTMLElement>('.v-theme, .v-theme-art');
       if (theme) {
         selectTheme(theme.dataset.theme!);
         revealList();
+        announcePill();
       }
     });
     visionRoot.addEventListener('keydown', (e) => {
@@ -262,6 +298,7 @@ function initFilters() {
       e.preventDefault();
       if (g.classList.contains('v-cluster')) selectVision(g.dataset.vision!);
       else selectTheme(g.dataset.theme!);
+      announcePill();
     });
   }
 
