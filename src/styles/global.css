@@ -373,7 +373,7 @@ a:hover .inline-logo, a:focus-visible .inline-logo { filter: none; }
   opacity: 0; pointer-events: none;
 }
 .vision-pill.is-announced::after {
-  animation: pill-trace 2.35s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards, pill-fade 2.35s linear forwards;
+  animation: pill-trace 1.65s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards, pill-fade 1.65s linear forwards;
 }
 /* Background pulse: brightens and dims twice while the spark runs. */
 .vision-pill::before {
@@ -381,12 +381,12 @@ a:hover .inline-logo, a:focus-visible .inline-logo { filter: none; }
   background: linear-gradient(90deg, #fff4cf, #ffe7a6);
   opacity: 0; pointer-events: none;
 }
-.vision-pill.is-announced::before { animation: pill-pulse 2.35s ease-in-out forwards; }
+.vision-pill.is-announced::before { animation: pill-pulse 1.65s ease-in-out forwards; }
 @keyframes pill-pulse { 0% { opacity: 0; } 22% { opacity: 1; } 45% { opacity: 0.15; } 70% { opacity: 1; } 100% { opacity: 0; } }
 @keyframes pill-trace { from { --pill-angle: 0deg; } to { --pill-angle: 360deg; } }
 @keyframes pill-fade { 0% { opacity: 0.5; } 8% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
-  .vision-pill.is-announced::after { background: #ffd75e; animation: pill-fade 2.35s linear forwards !important; }
+  .vision-pill.is-announced::after { background: #ffd75e; animation: pill-fade 1.65s linear forwards !important; }
 }
 .vision-clear { border: 0; background: var(--surface); border-radius: 50%; width: 1.4rem; height: 1.4rem; line-height: 1; cursor: pointer; }
 .count { color: var(--ink-3); white-space: nowrap; }
