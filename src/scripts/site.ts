@@ -27,6 +27,56 @@ if (heroName && topbar) {
   ).observe(heroName);
 }
 
+// ---------- 1c. Pronunciation link: scroll, then highlight the note ----------
+document.querySelector('.pronounce-link')?.addEventListener('click', (e) => {
+  const block = document.getElementById('pronounce');
+  if (!block) return;
+  e.preventDefault();
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  block.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+  history.replaceState(null, '', '#pronounce');
+  block.classList.remove('is-highlighted');
+  const glow = () => {
+    void block.offsetWidth; // restart the animation on repeated clicks
+    block.classList.add('is-highlighted');
+    block.addEventListener('animationend', () => block.classList.remove('is-highlighted'), { once: true });
+  };
+  if (reduce) return glow();
+  // Start the glow when scrolling has finished: 'scrollend' where supported,
+  // otherwise once the scroll position stops changing.
+  let done = false;
+  let corrected = false;
+  const finish = () => {
+    if (done) return;
+    // The layout can shift while the smooth scroll runs (e.g. with a filter active),
+    // so check where the note really ended up and finish the scroll if it's off.
+    const r = block.getBoundingClientRect();
+    const off = (r.top + r.bottom) / 2 - innerHeight / 2;
+    const header = document.querySelector('.topbar')?.getBoundingClientRect().bottom ?? 0;
+    if (!corrected && (Math.abs(off) > 80 || r.top < header || r.bottom > innerHeight)) {
+      corrected = true;
+      block.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      last = -1;
+      setTimeout(poll, 150);
+      return;
+    }
+    done = true;
+    listeners.abort();
+    glow();
+  };
+  let last = -1;
+  const listeners = new AbortController();
+  window.addEventListener('scrollend', () => finish(), { signal: listeners.signal });
+  const poll = () => {
+    if (done) return;
+    if (Math.abs(scrollY - last) < 1) return finish();
+    last = scrollY;
+    setTimeout(poll, 120);
+  };
+  setTimeout(poll, 150);
+  setTimeout(() => { corrected = true; finish(); }, 4000); // safety net
+});
+
 // ---------- 2. Filtering ----------
 const root = document.querySelector('.work');
 if (root) initFilters();

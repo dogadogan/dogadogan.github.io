@@ -132,8 +132,10 @@ const list = {
     <div class="about-grid">
       <div class="prose prose-lg" set:html={md(profile.bio)} />
       <aside class="about-aside">
-        <h3 class="section-label mono" id="pronounce">How to pronounce my name</h3>
-        <p set:html={md(profile.pronunciation)} />
+        <div class="pronounce-block" id="pronounce">
+          <h3 class="section-label mono">How to pronounce my name</h3>
+          <p set:html={md(profile.pronunciation)} />
+        </div>
         <h3 class="section-label mono">Elsewhere</h3>
         <ul class="plain-links">
           {profile.links.map((l: any) => <li><a href={l.url} rel="me noopener">{l.label}</a></li>)}
