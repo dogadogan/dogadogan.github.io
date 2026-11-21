@@ -66,6 +66,7 @@ const list = {
         {profile.links.slice(0, 5).map((l: any) => <li><a href={l.url} rel="me noopener">{l.label}</a></li>)}
         <li><a href="/Mustafa-Doga-Dogan-CV.pdf" class="cv-link" target="_blank" rel="noopener">CV</a></li>
       </ul>
+      <p class="hero-email">Email: {profile.email}</p>
     </div>
     <img class="hero-photo" src={profile.photo} alt={`Portrait of ${profile.fullName}`} width="640" height="640" fetchpriority="high" />
   </section>
@@ -195,7 +196,7 @@ const list = {
     </div>
   </section>
 
-  <section class="moments" aria-labelledby="moments-heading">
+  <section class="moments" id="moments" aria-labelledby="moments-heading">
     <div class="wrap"><h2 id="moments-heading" class="section-title">Moments</h2></div>
     <ul class="moments-strip">
       {activities.moments.map((m: any) => (
