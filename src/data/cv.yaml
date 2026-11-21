@@ -84,7 +84,7 @@ experience:
     people: { label: Advisor, names: [{ name: Stefanie Mueller, url: "https://stefaniemueller.org/" }] }
     place: Cambridge, MA
     dates: "Jun 2017 - Sep 2017"
-  - role: Undergraduate Researcher
+  - role: Researcher
     org: UCLA
     logo: /images/logos/UCLA-3.png
     units:
@@ -93,7 +93,7 @@ experience:
     people: { label: Advisor, names: [{ name: Ankur Mehta, url: "http://www.ee.ucla.edu/ankur-mehta/" }] }
     place: Los Angeles, CA
     dates: "2017"
-  - role: Undergraduate Researcher & Teaching Assistant
+  - role: Researcher & Teaching Assistant
     org: Boğaziçi University
     logo: /images/logos/Bogazici.png
     units:
