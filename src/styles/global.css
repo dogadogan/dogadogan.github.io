@@ -123,7 +123,7 @@ html.js .topbar.show-name ~ main .hero-name { opacity: 0.25; }
 .hero-name:hover .pronounce-link, .pronounce-link:focus-visible { opacity: 1; transform: none; }
 .pronounce-link:hover { color: var(--ink); }
 @media (hover: none), (max-width: 640px) { .pronounce-link { display: none; } }  /* phones/touch: no hover, so hide it */
-#pronounce { scroll-margin-top: 2.5rem; }
+#pronounce { scroll-margin-top: 1.5rem; }  /* plus the header height from html's scroll-padding-top */
 .pronounce-block { border-radius: 8px; padding: 0.6rem 0.75rem; margin: -0.6rem -0.75rem 1.15rem; }
 .pronounce-block p { margin-bottom: 0 !important; }
 .pronounce-block.is-highlighted { animation: pronounce-glow 2.2s ease-out; }
