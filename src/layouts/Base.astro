@@ -2,6 +2,18 @@
 import '@fontsource-variable/schibsted-grotesk';
 import '../styles/global.css';
 import { profile, absolute } from '../lib/data';
+import scholarIcon from '../assets/icons/googlescholar.svg?raw';
+import linkedinIcon from '../assets/icons/linkedin.svg?raw';
+import xIcon from '../assets/icons/x.svg?raw';
+import githubIcon from '../assets/icons/github.svg?raw';
+
+// Footer shows only these profiles, each with its brand icon (Simple Icons, CC0).
+const socialIcons: Record<string, string> = {
+  'Google Scholar': scholarIcon,
+  LinkedIn: linkedinIcon,
+  'X / Twitter': xIcon,
+  GitHub: githubIcon,
+};
 
 interface Props {
   title: string;
@@ -67,7 +79,9 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
           <p class="footer-name">{profile.fullName}. {new Date().getFullYear()}.</p>
         </div>
         <ul class="footer-links">
-          {profile.links.filter((l: any) => !['PhD thesis', 'Adobe profile', 'MIT profile'].includes(l.label)).map((l: any) => <li><a href={l.url} rel="me noopener">{l.label}</a></li>)}
+          {profile.links.filter((l: any) => socialIcons[l.label]).map((l: any) => (
+            <li><a href={l.url} rel="me noopener"><Fragment set:html={socialIcons[l.label]} />{l.label}</a></li>
+          ))}
         </ul>
       </div>
     </footer>

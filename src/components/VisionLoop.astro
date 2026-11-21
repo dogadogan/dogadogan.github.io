@@ -1,0 +1,20 @@
+---
+// Phone-sized "reinforcing loop" between the two vision panels:
+//    ⏟ brace above, tip pointing down at "digital"
+//            digital
+//  better understanding ⇅ better experiences, anywhere
+//            physical
+//    ⏞ brace below, tip pointing up at "physical"
+// Together the two braces wrap the loop, like the dotted arcs in the desktop drawing.
+const brace = (cls: string) =>
+  `<svg class="vloop-brace ${cls}" viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true"><path d="M2 13C2 7 7 7 30 7H88C96 7 100 5.5 100 1.5C100 5.5 104 7 112 7H170C193 7 198 7 198 13" fill="none" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" /></svg>`;
+---
+<div class="vloop" role="group" aria-label="A reinforcing loop between digital and physical contexts: better understanding and better experiences, anywhere">
+  <Fragment set:html={brace('vloop-brace-top')} />
+  <span class="vloop-digital">digital</span>
+  <span class="vloop-left">better understanding</span>
+  <svg class="vloop-arrows" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 20V5M8 5 4.5 8.5M8 5l3.5 3.5M16 4v15m0 0-3.5-3.5M16 19l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+  <span class="vloop-right">better experiences, anywhere</span>
+  <span class="vloop-physical">physical</span>
+  <Fragment set:html={brace('vloop-brace-bottom')} />
+</div>
